@@ -6,8 +6,8 @@ import "package:barcode_scan2/barcode_scan2.dart";
 import "package:flutter/services.dart";
 import "package:images_picker/images_picker.dart";
 import "package:scan/scan.dart";
-import "package:top_snackbar_flutter/custom_snack_bar.dart";
-import "package:top_snackbar_flutter/top_snack_bar.dart";
+// import "package:top_snackbar_flutter/custom_snack_bar.dart";
+// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:universal_html/html.dart" as html;
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -81,12 +81,12 @@ class _MobileQRState extends State<MobileQR> {
     }
     // ignore: avoid_slow_async_io
     if (await directory.exists()) {
-      final File file = File("${directory.path}${"/$dateToday.png"}");
+      final File file = File("${directory.path}${"/QRange $dateToday.png"}");
       debugPrint("$dateToday");
       file.writeAsBytesSync(bytes);
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${directory.path}${"/$dateToday.png"}")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("${directory.path}${"/QRange $dateToday.png"}")));
       return file;
     }
   }
@@ -94,7 +94,8 @@ class _MobileQRState extends State<MobileQR> {
   Future<dynamic> saveAndShare(Uint8List bytes) async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File image = File("${directory.path}/flutter.png");
-    final String text = widget.url;
+    const String text =
+        "Create QR Code in just 4 easy steps.Download QRange App: https://bit.ly/3BxNG0b or visit website:  https://www.qrange.in/";
     image.writeAsBytesSync(bytes);
     await Share.shareFiles(<String>[image.path], text: text);
   }
@@ -132,11 +133,20 @@ class _MobileQRState extends State<MobileQR> {
               color: const Color(0xff555555),
               itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                 PopupMenuItem<dynamic>(
-                    child: Image.asset(
-                  "assets/images/logo1.png",
-                  height: 30,
-                  width: 30,
-                )),
+                    enabled: false,
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/images/logo1.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        const Text(
+                          "  QRange",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    )),
                 if (!kIsWeb)
                   PopupMenuItem<dynamic>(
                     child: ListTile(
@@ -175,21 +185,20 @@ class _MobileQRState extends State<MobileQR> {
                                                           BorderRadius.circular(
                                                               30)),
                                                   shadowColor: Colors.grey),
-                                              onPressed: () {
-                                                _scan();
-                                                if (scanResult != null) {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute<
-                                                              dynamic>(
-                                                          builder: (_) =>
-                                                              ScanCopy(
-                                                                scantext:
-                                                                    scanResult!
-                                                                        .rawContent,
-                                                              )));
-                                                }
-                                              },
+                                              onPressed: _scan,
+                                              // if (scanResult != null) {
+                                              //   Navigator.push(
+                                              //       context,
+                                              //       MaterialPageRoute<
+                                              //               dynamic>(
+                                              //           builder: (_) =>
+                                              //               ScanCopy(
+                                              //                 scantext:
+                                              //                     scanResult!
+                                              //                         .rawContent,
+                                              //               )));
+                                              // }
+                                              // },
                                               // icon: Icon(Icons.camera_alt_outlined,),
                                               child: Row(
                                                 children: <Widget>[
@@ -290,7 +299,7 @@ class _MobileQRState extends State<MobileQR> {
                                                                   .circular(
                                                                       50)),
                                                       child: const Icon(
-                                                        Icons.camera_alt,
+                                                        Icons.collections,
                                                         color: Colors.white,
                                                         // size: MediaQuery.of(context).size.width *
                                                         //     0.045,
@@ -448,76 +457,93 @@ class _MobileQRState extends State<MobileQR> {
 
                 //code for buttons
                 Center(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    side: const BorderSide()))),
-                    onPressed: () async {
-                      try {
-                        final RenderRepaintBoundary boundary =
-                            _globalKey.currentContext!.findRenderObject()!
-                                as RenderRepaintBoundary;
-                        final ui.Image image1 = await boundary.toImage(
-                            pixelRatio: ui.window.devicePixelRatio);
-                        final ByteData? byteData = await image1.toByteData(
-                            format: ui.ImageByteFormat.png);
-                        pngBytes = byteData!.buffer.asUint8List();
-                        debugPrint(widget.url);
-                        // ignore: avoid_catches_without_on_clauses
-                      } catch (e) {
-                        debugPrint("hello");
-                      }
-                      if (kIsWeb) {
-                        html.Blob(
-                            <dynamic>[base64Encode(pngBytes!)], "image/png");
-                        html.AnchorElement()
-                          // ignore: unsafe_html
-                          ..href =
-                              "${Uri.dataFromBytes(pngBytes!, mimeType: "image/png")}"
-                          ..download = "$dateToday.png"
-                          ..click();
-                      } else if (Platform.isAndroid) {
-                        final Uint8List image =
-                            await controller.captureFromWidget(buildQR());
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.only(
+                              top: 2, right: 2, left: 5, bottom: 2),
+                          primary: const Color(0xFFFFFFFF),
+                          // shape: const CircleBorder(),
+                          shadowColor: Colors.grey,
+                          shape: const StadiumBorder()
+                          // shape:
+                          ),
+                      onPressed: () async {
+                        try {
+                          final RenderRepaintBoundary boundary =
+                              _globalKey.currentContext!.findRenderObject()!
+                                  as RenderRepaintBoundary;
+                          final ui.Image image1 = await boundary.toImage(
+                              pixelRatio: ui.window.devicePixelRatio);
+                          final ByteData? byteData = await image1.toByteData(
+                              format: ui.ImageByteFormat.png);
+                          pngBytes = byteData!.buffer.asUint8List();
+                          debugPrint(widget.url);
+                          // ignore: avoid_catches_without_on_clauses
+                        } catch (e) {
+                          debugPrint("hello");
+                        }
+                        if (kIsWeb) {
+                          html.Blob(
+                              <dynamic>[base64Encode(pngBytes!)], "image/png");
+                          html.AnchorElement()
+                            // ignore: unsafe_html
+                            ..href =
+                                "${Uri.dataFromBytes(pngBytes!, mimeType: "image/png")}"
+                            ..download = "$dateToday.png"
+                            ..click();
+                        } else if (Platform.isAndroid) {
+                          final Uint8List image =
+                              await controller.captureFromWidget(buildQR());
 
-                        await saveImage(image);
-                      }
-                      setState(() {
-                        showTopSnackBar(
-                          context,
-                          const CustomSnackBar.success(
-                            message: "Download complete",
-                          ),
-                        );
-                      });
-                    },
-                    child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.50,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(
-                                Icons.cloud_download,
-                                color: Colors.black,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Download",
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                            ],
-                          ),
-                        )),
+                          await saveImage(image);
+                        }
+                        setState(() {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Download complete")));
+                          // showTopSnackBar(
+                          //   context,
+                          //   const CustomSnackBar.success(
+                          //     message: "Download complete",
+                          //   ),
+                          // );
+                        });
+                      },
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.50,
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          child: Center(
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.cen,
+                              children: <Widget>[
+                                Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 8, right: 8, left: 8),
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xffE75527),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.file_download,
+                                      color: Colors.white,
+                                      // size: MediaQuery.of(context).size.width *
+                                      //     0.045,
+                                    )),
+                                // const SizedBox(
+                                //   width: 10,
+                                // ),
+                                const Text(
+                                  "  Download",
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -526,42 +552,52 @@ class _MobileQRState extends State<MobileQR> {
                 if (kIsWeb)
                   const SizedBox.shrink()
                 else
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    side: const BorderSide()))),
-                    onPressed: () async {
-                      final Uint8List image =
-                          await controller.captureFromWidget(buildQR());
-                      saveAndShare(image);
-                    },
-                    child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.50,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(
-                                Icons.share,
-                                color: Colors.black,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Share",
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                            ],
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.only(
+                              top: 5, right: 2, left: 5, bottom: 5),
+                          primary: const Color(0xFFFFFFFF),
+                          // shape: const CircleBorder(),
+                          shadowColor: Colors.grey,
+                          shape: const StadiumBorder()
+                          // shape:
                           ),
-                        )),
+                      onPressed: () async {
+                        final Uint8List image =
+                            await controller.captureFromWidget(buildQR());
+                        saveAndShare(image);
+                      },
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.50,
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 8, right: 8, left: 4),
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xffE75527),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.share,
+                                      color: Colors.white,
+                                      // size: MediaQuery.of(context).size.width *
+                                      //     0.045,
+                                    )),
+                                const Text(
+                                  "  Share",
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
                   ),
               ]),
             ),
@@ -601,7 +637,7 @@ class _MobileQRState extends State<MobileQR> {
   }
 
   void _scanResult(String scanResult) {
-    if (!scanResult.contains("")) {
+    if (scanResult != "") {
       Navigator.push(
           context,
           MaterialPageRoute<dynamic>(

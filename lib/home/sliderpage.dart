@@ -7,7 +7,30 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:images_picker/images_picker.dart";
 import "package:scan/scan.dart";
+import "/desktopview/desktopslider.dart";
 import "/home/scanpage.dart";
+
+class SliderPg extends StatefulWidget {
+  const SliderPg({Key? key}) : super(key: key);
+
+  @override
+  _SliderPgState createState() => _SliderPgState();
+}
+
+class _SliderPgState extends State<SliderPg> {
+  @override
+  Widget build(BuildContext context) => SafeArea(
+        child: LayoutBuilder(
+          builder: (_, __) {
+            if (__.maxWidth > 768) {
+              return const DesktopSlider();
+            } else {
+              return const SliderPage();
+            }
+          },
+        ),
+      );
+}
 
 final List<String> imgList = <String>[
   "assets/images/slider.png",
@@ -47,14 +70,9 @@ class _SliderPageState extends State<SliderPage> {
   List<BarcodeFormat> selectedFormats = <BarcodeFormat>[..._possibleFormats];
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.65;
-    final ScanResult? scanResult = this.scanResult;
+    // final ScanResult? scanResult = this.scanResult;
     return SafeArea(
       child: Container(
         color: const Color(0xffE5E5E5),
@@ -187,21 +205,7 @@ class _SliderPageState extends State<SliderPage> {
                                                                             30)),
                                                             shadowColor:
                                                                 Colors.grey),
-                                                    onPressed: () {
-                                                      _scan();
-                                                      if (scanResult != null) {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute<
-                                                                    dynamic>(
-                                                                builder: (_) =>
-                                                                    ScanCopy(
-                                                                      scantext:
-                                                                          scanResult
-                                                                              .rawContent,
-                                                                    )));
-                                                      }
-                                                    },
+                                                    onPressed: _scan,
                                                     // icon: Icon(Icons.camera_alt_outlined,),
                                                     child: Row(
                                                       children: <Widget>[
@@ -311,7 +315,7 @@ class _SliderPageState extends State<SliderPage> {
                                                                         .circular(
                                                                             50)),
                                                             child: const Icon(
-                                                              Icons.camera_alt,
+                                                              Icons.collections,
                                                               color:
                                                                   Colors.white,
                                                               // size: MediaQuery.of(context).size.width *
@@ -354,7 +358,7 @@ class _SliderPageState extends State<SliderPage> {
                                         borderRadius:
                                             BorderRadius.circular(50)),
                                     child: const Icon(
-                                      Icons.camera_alt,
+                                      Icons.camera,
                                       color: Colors.white,
                                     )),
                                 const AutoSizeText(
@@ -368,7 +372,7 @@ class _SliderPageState extends State<SliderPage> {
                                 ),
                               ],
                             )),
-                      const SizedBox(width: 5),
+                      if (!kIsWeb) const SizedBox(width: 5),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               // fixedSize: Size(
@@ -383,6 +387,7 @@ class _SliderPageState extends State<SliderPage> {
                               ),
                           onPressed: () {
                             Navigator.pushNamed(context, "/createqr");
+
                             // context.vxNav.push(Uri.parse("/createqr"));
                           },
                           // icon: Icon(Icons.camera_alt_outlined,),
@@ -394,7 +399,7 @@ class _SliderPageState extends State<SliderPage> {
                                       color: const Color(0xffE75527),
                                       borderRadius: BorderRadius.circular(50)),
                                   child: const Icon(
-                                    Icons.camera_alt,
+                                    Icons.qr_code,
                                     color: Colors.white,
                                     // size: MediaQuery.of(context).size.width *
                                     //     0.045,
@@ -413,9 +418,9 @@ class _SliderPageState extends State<SliderPage> {
                     ],
                   )),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
-            )
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
@@ -455,7 +460,7 @@ class _SliderPageState extends State<SliderPage> {
   }
 
   void _scanResult(String scanResult) {
-    if (!scanResult.contains("")) {
+    if (scanResult != "") {
       Navigator.push(
           context,
           MaterialPageRoute<dynamic>(

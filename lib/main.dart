@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
         },
         routes: <String, WidgetBuilder>{
           "/": (_) => const MyHomePage(),
-          "/slider": (_) => const SliderPage(),
+          "/slider": (_) => const SliderPg(),
           "/createqr": (_) => const CreateQr(),
           "/mobileqr": (_) =>
               MobileQR(url: "https://www.orangedigisolutions.com/"),
@@ -118,13 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      if (kIsWeb) {
-        Navigator.pushNamedAndRemoveUntil(context, "/createqr", (_) => false);
-        // context.vxNav.clearAndPush(Uri.parse("/createqr"));
-      } else {
-        Navigator.pushNamedAndRemoveUntil(context, "/slider", (_) => false);
-        // context.vxNav.clearAndPush(Uri.parse("/slider"));
-      }
+      // if (kIsWeb) {
+      //   Navigator.pushNamedAndRemoveUntil(
+      //       context, "/desktopslider", (_) => false);
+      //   // context.vxNav.clearAndPush(Uri.parse("/createqr"));
+      // } else {
+      Navigator.pushNamedAndRemoveUntil(context, "/slider", (_) => false);
+      // context.vxNav.clearAndPush(Uri.parse("/slider"));
+      // }
     });
   }
 

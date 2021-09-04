@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "package:sliding_up_panel/sliding_up_panel.dart";
+import "/desktopview/desktopurlcat.dart";
 import "/home/menu.dart";
 import "desktopimagecat.dart";
 import "desktoppdfcat.dart";
+import "desktoptextcat.dart";
 
 class DesktopCreateQr extends StatefulWidget {
   const DesktopCreateQr({Key? key}) : super(key: key);
@@ -18,7 +20,9 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     DesktopImageCat(),
-    DesktopPDFCat()
+    DesktopPDFCat(),
+    DesktopUrlCat(),
+    DesktopTextCat(),
   ];
 
   void _onItemTapped(int index) {
@@ -119,7 +123,9 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   _buildIcon(Icons.image_outlined, "Image", 0),
-                                  _buildIcon(Icons.picture_as_pdf, "PDF", 1)
+                                  _buildIcon(Icons.picture_as_pdf, "PDF", 1),
+                                  _buildIcon(Icons.link, "URL", 2),
+                                  _buildIcon(Icons.text_fields, "Text", 3),
                                 ],
                               ),
                             ],
@@ -170,11 +176,20 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                 color: const Color(0xff555555),
                 itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                   PopupMenuItem<dynamic>(
-                      child: Image.asset(
-                    "assets/images/logo1.png",
-                    height: 30,
-                    width: 30,
-                  )),
+                      enabled: false,
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/images/logo1.png",
+                            height: 30,
+                            width: 30,
+                          ),
+                          const Text(
+                            "  QRange",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      )),
                   PopupMenuItem<dynamic>(
                     child: ListTile(
                       onTap: () {

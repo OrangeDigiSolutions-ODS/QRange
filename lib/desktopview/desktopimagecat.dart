@@ -5,8 +5,8 @@ import "package:dotted_border/dotted_border.dart";
 import "package:file_picker/file_picker.dart";
 import "package:flutter/material.dart";
 import "package:flutter_dropzone/flutter_dropzone.dart";
-import "package:top_snackbar_flutter/custom_snack_bar.dart";
-import "package:top_snackbar_flutter/top_snack_bar.dart";
+// import "package:top_snackbar_flutter/custom_snack_bar.dart";
+// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:uuid/uuid.dart";
 import "/firebase/imageuploader.dart";
 import "desktopqrview.dart";
@@ -161,14 +161,15 @@ class _DesktopImageCatState extends State<DesktopImageCat> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   if (path1.isNotEmpty)
                     ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xffDD4C00)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50),
-                                      side: const BorderSide()))),
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.only(
+                              top: 1, right: 1, left: 1, bottom: 1),
+                          primary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          shadowColor: Colors.grey
+                          // shape:
+                          ),
                       onPressed: () {
                         if (path1.isNotEmpty && waiting == false) {
                           final String v4 = uuid.v4();
@@ -187,35 +188,53 @@ class _DesktopImageCatState extends State<DesktopImageCat> {
                           }
                         } else {
                           if (waiting == true) {
-                            showTopSnackBar(
-                              context,
-                              const CustomSnackBar.error(
-                                message: "wait until file upload",
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text("wait until file upload")));
+                            // showTopSnackBar(
+                            //   context,
+                            //   const CustomSnackBar.error(
+                            //     message: "wait until file upload",
+                            //   ),
+                            // );
                           } else {
-                            showTopSnackBar(
-                              context,
-                              const CustomSnackBar.error(
-                                message: "Please select a image file first.",
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        "Please select a image file first.")));
+                            // showTopSnackBar(
+                            //   context,
+                            //   const CustomSnackBar.error(
+                            //     message: "Please select a image file first.",
+                            //   ),
+                            // );
                           }
                         }
                       },
                       child: SizedBox(
-                        width: 50,
-                        height: 50,
+                        width: 200,
+                        // height: 50,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            if (waiting == false)
-                              const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )
-                            else
-                              const CircularProgressIndicator()
+                            Container(
+                                padding: const EdgeInsets.only(
+                                    top: 8, bottom: 8, right: 8, left: 8),
+                                decoration: BoxDecoration(
+                                    color: const Color(0xffE75527),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  // size: MediaQuery.of(context).size.width *
+                                  //     0.045,
+                                )),
+                            const AutoSizeText(
+                              "  Generated QR",
+                              minFontSize: 18,
+                              maxFontSize: 26,
+                              style: TextStyle(color: Colors.black87),
+                            )
                           ],
                         ),
                       ),
@@ -245,19 +264,27 @@ class _DesktopImageCatState extends State<DesktopImageCat> {
 
   void uploadpic(String v4) {
     Navigator.push(
-        context,
-        MaterialPageRoute<dynamic>(
-            builder: (_) => DesktopQRView(
-                url:
-                    "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4")));
+            context,
+            MaterialPageRoute<dynamic>(
+                builder: (_) => DesktopQRView(
+                    url:
+                        "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4")))
+        .whenComplete(() {
+      setState(() {
+        waiting = false;
+        path1 = <Uint8List>[];
+      });
+    });
     // context.vxNav.push(Uri.parse("/desktopqr"),
     //     params: "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4");
-    showTopSnackBar(
-      context,
-      const CustomSnackBar.success(
-        message: "File upload successfully",
-      ),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("File upload successfully")));
+    // showTopSnackBar(
+    //   context,
+    //   const CustomSnackBar.success(
+    //     message: "File upload successfully",
+    //   ),
+    // );
     setState(() {
       condition = false;
     });

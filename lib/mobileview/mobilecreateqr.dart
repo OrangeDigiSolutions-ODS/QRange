@@ -10,6 +10,8 @@ import "/home/menu.dart";
 import "/home/scanpage.dart";
 import "/mobileview/image.dart";
 import "/mobileview/pdf.dart";
+import "/mobileview/textcat.dart";
+import "/mobileview/ulrcat.dart";
 import "slidepanelanimation.dart";
 
 class MobileCreateQr extends StatefulWidget {
@@ -44,7 +46,12 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
 
   List<BarcodeFormat> selectedFormats = <BarcodeFormat>[..._possibleFormats];
 
-  static const List<Widget> _widgetOptions = <Widget>[ImageCat(), PdfCat()];
+  static const List<Widget> _widgetOptions = <Widget>[
+    ImageCat(),
+    PdfCat(),
+    UrlCat(),
+    TextCat(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -151,7 +158,14 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
                             children: <Widget>[
                               // Text("ac"), Text("ff")
                               _buildIcon(Icons.image_outlined, "Image", 0),
-                              _buildIcon(Icons.picture_as_pdf, "PDF", 1)
+                              _buildIcon(Icons.picture_as_pdf, "PDF", 1),
+                              _buildIcon(Icons.link, "Url", 2)
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              _buildIcon(Icons.text_fields, "Text", 3),
                             ],
                           ),
                         ],
@@ -182,11 +196,20 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
                 color: const Color(0xff555555),
                 itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                   PopupMenuItem<dynamic>(
-                      child: Image.asset(
-                    "assets/images/logo1.png",
-                    height: 30,
-                    width: 30,
-                  )),
+                      enabled: false,
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/images/logo1.png",
+                            height: 30,
+                            width: 30,
+                          ),
+                          const Text(
+                            "  QRange",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      )),
                   if (!kIsWeb)
                     PopupMenuItem<dynamic>(
                       child: ListTile(
@@ -229,21 +252,20 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
                                                                     .circular(
                                                                         30)),
                                                     shadowColor: Colors.grey),
-                                                onPressed: () {
-                                                  _scan();
-                                                  if (scanResult != null) {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute<
-                                                                dynamic>(
-                                                            builder: (_) =>
-                                                                ScanCopy(
-                                                                  scantext:
-                                                                      scanResult!
-                                                                          .rawContent,
-                                                                )));
-                                                  }
-                                                },
+                                                onPressed: _scan,
+                                                // if (scanResult != null) {
+                                                //   Navigator.push(
+                                                //       context,
+                                                //       MaterialPageRoute<
+                                                //               dynamic>(
+                                                //           builder: (_) =>
+                                                //               ScanCopy(
+                                                //                 scantext:
+                                                //                     scanResult!
+                                                //                         .rawContent,
+                                                //               )));
+                                                // }
+                                                // },
                                                 // icon: Icon(Icons.camera_alt_outlined,),
                                                 child: Row(
                                                   children: <Widget>[
@@ -347,7 +369,7 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
                                                                     .circular(
                                                                         50)),
                                                         child: const Icon(
-                                                          Icons.camera_alt,
+                                                          Icons.collections,
                                                           color: Colors.white,
                                                           // size: MediaQuery.of(context).size.width *
                                                           //     0.045,
@@ -483,7 +505,7 @@ class _MobileCreateQrState extends State<MobileCreateQr> {
   }
 
   void _scanResult(String scanResult) {
-    if (!scanResult.contains("")) {
+    if (scanResult != "") {
       Navigator.push(
           context,
           MaterialPageRoute<dynamic>(

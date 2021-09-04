@@ -2,8 +2,8 @@ import "dart:convert";
 import "dart:io";
 import "dart:typed_data";
 import "dart:ui" as ui;
-import "package:top_snackbar_flutter/custom_snack_bar.dart";
-import "package:top_snackbar_flutter/top_snack_bar.dart";
+// import "package:top_snackbar_flutter/custom_snack_bar.dart";
+// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:universal_html/html.dart" as html;
 import "package:auto_size_text_pk/auto_size_text_pk.dart";
 import "package:flutter/foundation.dart";
@@ -57,7 +57,7 @@ class _DesktopQRViewState extends State<DesktopQRView> {
     }
     // ignore: avoid_slow_async_io
     if (await directory.exists()) {
-      final File file = File("${directory.path}${"/$dateToday.png"}");
+      final File file = File("${directory.path}${"/QRange $dateToday.png"}");
       debugPrint("$dateToday");
       file.writeAsBytesSync(bytes);
       return file;
@@ -124,11 +124,20 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                   color: const Color(0xff555555),
                   itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                     PopupMenuItem<dynamic>(
-                        child: Image.asset(
-                      "assets/images/logo1.png",
-                      height: 30,
-                      width: 30,
-                    )),
+                        enabled: false,
+                        child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              "assets/images/logo1.png",
+                              height: 30,
+                              width: 30,
+                            ),
+                            const Text(
+                              "  QRange",
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        )),
                     PopupMenuItem<dynamic>(
                       child: ListTile(
                         onTap: () {
@@ -251,7 +260,7 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                           // ignore: unsafe_html
                           ..href =
                               "${Uri.dataFromBytes(pngBytes!, mimeType: "image/png")}"
-                          ..download = "$dateToday.png"
+                          ..download = "QRange $dateToday.png"
                           ..click();
                       } else if (Platform.isAndroid) {
                         final Uint8List image =
@@ -259,12 +268,14 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                         await saveImage(image);
                       }
                       setState(() {
-                        showTopSnackBar(
-                          context,
-                          const CustomSnackBar.success(
-                            message: "Download complete",
-                          ),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Download complete")));
+                        // showTopSnackBar(
+                        //   context,
+                        //   const CustomSnackBar.success(
+                        //     message: "Download complete",
+                        //   ),
+                        // );
                       });
                     },
                     child: SizedBox(
@@ -272,19 +283,28 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: Center(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(
-                                Icons.cloud_download,
-                                color: Colors.black,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Download",
+                            // mainAxisAlignment: MainAxisAlignment.cen,
+                            children: <Widget>[
+                              Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 5, bottom: 8, right: 8, left: 8),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xffE75527),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.file_download,
+                                    color: Colors.white,
+                                    // size: MediaQuery.of(context).size.width *
+                                    //     0.045,
+                                  )),
+                              // const SizedBox(
+                              //   width: 10,
+                              // ),
+                              const Text(
+                                "  Download",
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 17, color: Colors.black),
                               ),
                             ],
                           ),

@@ -1,7 +1,7 @@
-name: qrange
+name: QRange
 description: Qrange is a web app which create QR for image and pdf.
 publish_to: 'none' 
-version: 2.0.6+8
+version: 3.0.0+11
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -32,7 +32,7 @@ dependencies:
   shared_preferences: ^2.0.6
   sliding_up_panel: ^2.0.0+1
   syncfusion_flutter_pdfviewer: ^19.2.49-beta
-  top_snackbar_flutter: ^1.0.0
+  # top_snackbar_flutter: ^1.0.0
   universal_html: ^2.0.8
   url_launcher: ^6.0.9
   url_strategy: ^0.2.0
