@@ -25,7 +25,7 @@ class _DesktopSliderState extends State<DesktopSlider> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height * 0.7;
+    final double height = MediaQuery.of(context).size.height * 0.68;
     return Scaffold(
       appBar: AppBar(
         title: Padding(

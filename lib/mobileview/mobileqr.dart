@@ -412,7 +412,8 @@ class _MobileQRState extends State<MobileQR> {
                     children: <Widget>[
                       Center(
                         child: Container(
-                            color: const Color(0xffEDEEF1),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red,width: 5)),
                             width: MediaQuery.of(context).size.width * 0.80,
                             height: MediaQuery.of(context).size.width * 0.80,
                             child: RepaintBoundary(

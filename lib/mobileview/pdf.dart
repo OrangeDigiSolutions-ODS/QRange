@@ -364,14 +364,23 @@ class _PdfCatState extends State<PdfCat> {
                                     //     0.045,
                                   )),
                               const SizedBox(width: 10),
-                              const Center(
-                                child: AutoSizeText(
-                                  " Upload PDF",
-                                  minFontSize: 18,
-                                  maxFontSize: 26,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    if (path1 != null || path2 != null)
+                                      const Text(
+                                        "Change PDF",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      )
+                                    else
+                                      const Text(
+                                        "Upload PDF",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      ),
+                                  ],
                                 ),
                               )
                             ],

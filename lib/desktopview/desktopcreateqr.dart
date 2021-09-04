@@ -176,20 +176,19 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                 color: const Color(0xff555555),
                 itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                   PopupMenuItem<dynamic>(
-                      enabled: false,
                       child: Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/images/logo1.png",
-                            height: 30,
-                            width: 30,
-                          ),
-                          const Text(
-                            "  QRange",
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
-                      )),
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/images/logo1.png",
+                        height: 30,
+                        width: 30,
+                      ),
+                      const Text(
+                        "  QRange",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  )),
                   PopupMenuItem<dynamic>(
                     child: ListTile(
                       onTap: () {

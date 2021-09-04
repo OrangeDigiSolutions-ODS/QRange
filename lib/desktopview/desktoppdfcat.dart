@@ -184,11 +184,23 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.15,
                               height: MediaQuery.of(context).size.height * 0.07,
-                              child: const Center(
-                                child: Text(
-                                  "Upload Pdf",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    if (path1 != null)
+                                      const Text(
+                                        "Change PDF",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      )
+                                    else
+                                      const Text(
+                                        "Upload PDF",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      ),
+                                  ],
                                 ),
                               )),
                         ),
@@ -267,18 +279,21 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    top: 8, bottom: 8, right: 8, left: 8),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffE75527),
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  // size: MediaQuery.of(context).size.width *
-                                  //     0.045,
-                                )),
+                            if (waiting == false)
+                              Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffE75527),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    // size: MediaQuery.of(context).size.width *
+                                    //     0.045,
+                                  ))
+                            else
+                              const CircularProgressIndicator(),
                             const AutoSizeText(
                               "  Generated QR",
                               minFontSize: 18,

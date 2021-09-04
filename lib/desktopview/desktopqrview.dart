@@ -179,7 +179,7 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                   Container(
                     padding: const EdgeInsets.only(left: 50, right: 50),
                     child: const AutoSizeText(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iaculis at sed facilisis duis hac laoreet ipsum malesuada enim. Suspendisse pulvinar",
+                      "Thank you for using QRange.The QR Code has been Generated.Please download to print and share.",
                       style: TextStyle(
                         fontFamily: "Raleway",
                         fontStyle: FontStyle.normal,
@@ -191,7 +191,13 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                   ),
                   Stack(children: <Widget>[
                     Center(
-                        child: SizedBox(
+                        child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 5,
+                              ),
+                            ),
                             width: MediaQuery.of(context).size.width * 0.2,
                             height: MediaQuery.of(context).size.height * 0.4,
                             child: RepaintBoundary(

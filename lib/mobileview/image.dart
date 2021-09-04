@@ -499,7 +499,7 @@ class _ImageCatState extends State<ImageCat> {
             MaterialPageRoute<dynamic>(
                 builder: (_) => MobileQR(
                     url:
-                        "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4")))
+                        "https://qrange-12854.web.app/images/viewqr?id=$v4")))
         .whenComplete(() {
       setState(() {
         path1.clear();

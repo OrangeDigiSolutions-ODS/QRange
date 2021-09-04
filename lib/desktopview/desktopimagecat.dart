@@ -217,18 +217,21 @@ class _DesktopImageCatState extends State<DesktopImageCat> {
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    top: 8, bottom: 8, right: 8, left: 8),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffE75527),
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  // size: MediaQuery.of(context).size.width *
-                                  //     0.045,
-                                )),
+                            if (waiting == false)
+                              Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffE75527),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    // size: MediaQuery.of(context).size.width *
+                                    //     0.045,
+                                  ))
+                            else
+                              const CircularProgressIndicator(),
                             const AutoSizeText(
                               "  Generated QR",
                               minFontSize: 18,
@@ -268,7 +271,7 @@ class _DesktopImageCatState extends State<DesktopImageCat> {
             MaterialPageRoute<dynamic>(
                 builder: (_) => DesktopQRView(
                     url:
-                        "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4")))
+                        "https://qrange-12854.web.app/images/viewqr?id=$v4")))
         .whenComplete(() {
       setState(() {
         waiting = false;

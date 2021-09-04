@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => MaterialApp(
+    
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         title: "QRange",
@@ -32,39 +33,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // initialRoute: "/",
-        // // routeInformationParser: VxInformationParser(),
-
-        // routerDelegate:
-        //     // ignore: avoid_annotating_with_dynamic
-        //     VxNavigator(routes: <Pattern, Page<dynamic> Function(Uri, dynamic)>{
-        // "/": (_, __) => const MaterialPage<dynamic>(child: MyHomePage()),
-        // "/slider": (_, __) =>
-        //     const MaterialPage<dynamic>(child: SliderPage()),
-        // // "/scan": (_, __) => const MaterialPage<dynamic>(child: ScanPage()),
-        // "/createqr": (_, __) =>
-        //     const MaterialPage<dynamic>(child: CreateQr()),
-        // "/mobileqr": (_, __) =>
-        //     MaterialPage<dynamic>(child: MobileQR(url: __.toString())),
-        // "/desktopqr": (_, __) =>
-        //     MaterialPage<dynamic>(child: DesktopQRView(url: __.toString())),
-        // "/viewqrimage": (_, __) => MaterialPage<dynamic>(
-        //         child: ViewQRImage(
-        //       uri: __.toString(),
-        //     )),
-        // "/viewqrpdf": (_, __) => MaterialPage<dynamic>(
-        //         child: ViewQRPDF(
-        //       url: __.toString(),
-        //     )),
-        // "/viewqrimage/image": (_, __) => MaterialPage<dynamic>(
-        //         child: ViewQRImage(
-        //       uri: _.toString(),
-        //     )),
-
-        // }),
-
-        // home: const MyHomePage(),
-        // initialRoute: "/",
         onGenerateRoute: (__) {
           if (__.name!.contains("images/viewqr")) {
             final Uri setttingsUri = Uri.parse(__.name!);
@@ -90,18 +58,7 @@ class MyApp extends StatelessWidget {
               MobileQR(url: "https://www.orangedigisolutions.com/"),
           "/desktopqr": (_) =>
               DesktopQRView(url: "https://www.orangedigisolutions.com/"),
-          // "/viewqrimage": (_, __) => MaterialPage<dynamic>(
-          //         child: ViewQRImage(
-          //       uri: __.toString(),
-          //     )),
-          // "/viewqrpdf": (_, __) => MaterialPage<dynamic>(
-          //         child: ViewQRPDF(
-          //       url: __.toString(),
-          //     )),
-          // "/viewqrimage/image": (_, __) => MaterialPage<dynamic>(
-          //         child: ViewQRImage(
-          //       uri: _.toString(),
-          //     )),
+          
         },
       );
 }
