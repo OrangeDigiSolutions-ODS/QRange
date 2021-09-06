@@ -557,6 +557,7 @@ class _ImageCatState extends State<ImageCat> {
                   },
                   icon: const Icon(Icons.close)),
             ),
+            
             // Container(
             //   alignment: Alignment.centerLeft,
             //   margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),

@@ -1,11 +1,11 @@
 {
-    "name": "qrange",
-    "short_name": "qrange",
-    "start_url": ".",
+    "name": "QRange",
+    "short_name": "QRange",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Qrange is a web app which create QR for image and pdf.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

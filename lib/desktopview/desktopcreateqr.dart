@@ -176,18 +176,26 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                 color: const Color(0xff555555),
                 itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                   PopupMenuItem<dynamic>(
-                      child: Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/images/logo1.png",
-                        height: 30,
-                        width: 30,
-                      ),
-                      const Text(
-                        "  QRange",
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
+                      // enabled: false,
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "/slider", (_) => false);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/images/logo1.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        const Text(
+                          "  QRange",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
                   )),
                   PopupMenuItem<dynamic>(
                     child: ListTile(
@@ -197,19 +205,31 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                             context, "/createqr", (_) => false);
                         // context.vxNav.push(Uri.parse("/createqr"));
                       },
-                      title: const Text("Create QR",
-                          style: TextStyle(color: Colors.white)),
+                      title: Row(
+                        children: const <Widget>[
+                          Icon(Icons.qr_code),
+                          SizedBox(width: 10),
+                          Text("Create QR",
+                              style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
                     ),
                   ),
                   const PopupMenuDivider(
                     height: 20,
                   ),
-                  const PopupMenuItem<dynamic>(
+                  PopupMenuItem<dynamic>(
                     child: ListTile(
                       onTap: Menu.privacyPolicy,
                       // leading: Icon(Icons.anchor, color: Colors.white),
-                      title: Text("Privacy Policy",
-                          style: TextStyle(color: Colors.white)),
+                      title: Row(
+                        children: const <Widget>[
+                          Icon(Icons.security),
+                          SizedBox(width: 10),
+                          Text("Privacy Policy",
+                              style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
                     ),
                   ),
                 ],

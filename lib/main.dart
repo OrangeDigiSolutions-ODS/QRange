@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: Colors.black),
                           ),
                           Text(
-                            "DigiSolution",
+                            "DigiSolutions",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,

@@ -77,20 +77,27 @@ class _ViewQRImageState extends State<ViewQRImage> {
             color: const Color(0xff555555),
             itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
               PopupMenuItem<dynamic>(
-                  enabled: false,
-                  child: Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/images/logo1.png",
-                        height: 30,
-                        width: 30,
-                      ),
-                      const Text(
-                        "  QRange",
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  )),
+                  // enabled: false,
+                  child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "/slider", (_) => false);
+                },
+                child: Row(
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/images/logo1.png",
+                      height: 30,
+                      width: 30,
+                    ),
+                    const Text(
+                      "  QRange",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              )),
               if (!kIsWeb)
                 PopupMenuItem<dynamic>(
                   child: ListTile(
@@ -266,9 +273,15 @@ class _ViewQRImageState extends State<ViewQRImage> {
                       // context.vxNav.push(Uri.parse("/scan"));
                     },
                     // leading: Icon(Icons.add, color: Colors.white),
-                    title: const Text(
-                      "Scan QR",
-                      style: TextStyle(color: Colors.white),
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.camera),
+                        SizedBox(width: 10),
+                        Text(
+                          "Scan QR",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -283,50 +296,78 @@ class _ViewQRImageState extends State<ViewQRImage> {
                     // context.vxNav.push(Uri.parse("/createqr"));
                   },
                   // leading: Icon(Icons.anchor, color: Colors.white),
-                  title: const Text("Create QR",
-                      style: TextStyle(color: Colors.white)),
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.qr_code),
+                      SizedBox(width: 10),
+                      Text("Create QR", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
                 ),
               ),
               // const PopupMenuDivider(
               //   height: 20,
               // ),
-              const PopupMenuItem<dynamic>(
+              PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.privacyPolicy,
                   // leading: Icon(Icons.anchor, color: Colors.white),
-                  title: Text("Privacy Policy",
-                      style: TextStyle(color: Colors.white)),
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.security),
+                      SizedBox(width: 10),
+                      Text("Privacy Policy",
+                          style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
                 ),
               ),
               // const PopupMenuDivider(
               //   height: 20,
               // ),
-              const PopupMenuItem<dynamic>(
+              PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.rateus,
                   // leading: Icon(Icons.anchor, color: Colors.white),
-                  title: Text("Rate us", style: TextStyle(color: Colors.white)),
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.star),
+                      SizedBox(width: 10),
+                      Text("Rate us", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
                 ),
               ),
               // const PopupMenuDivider(
               //   height: 20,
               // ),
-              const PopupMenuItem<dynamic>(
+              PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.aboutus,
                   // leading: Icon(Icons.anchor, color: Colors.white),
-                  title:
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.info),
+                      SizedBox(width: 10),
                       Text("About us", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
                 ),
               ),
               // const PopupMenuDivider(
               //   height: 20,
               // ),
-              const PopupMenuItem<dynamic>(
+              PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.share,
                   // leading: Icon(Icons.anchor, color: Colors.white),
-                  title: Text("Share", style: TextStyle(color: Colors.white)),
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.share),
+                      SizedBox(width: 10),
+                      Text("Share", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
                 ),
               ),
             ],

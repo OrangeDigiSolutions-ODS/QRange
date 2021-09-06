@@ -106,8 +106,51 @@ class _MobileQRState extends State<MobileQR> {
   Widget buildQR() => Container(
         color: ColorCode.white,
         child: Center(
-          child: QrImage(
-            data: widget.url,
+            child: QrImage(
+          data: widget.url,
+        )),
+      );
+
+  Widget buildQR1() => Container(
+        color: ColorCode.white,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).size.width * 0.6,
+                child: QrImage(
+                  data: widget.url,
+                ),
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Image(
+                          image: AssetImage(
+                            "assets/images/logo2.png",
+                          ),
+                          fit: BoxFit.fill,
+                          width: 30,
+                          height: 30,
+                        ),
+                        Text("Powered by OrangeDigiSolutions",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 8,
+                              color: Colors.black,
+                            )),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -133,20 +176,27 @@ class _MobileQRState extends State<MobileQR> {
               color: const Color(0xff555555),
               itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                 PopupMenuItem<dynamic>(
-                    enabled: false,
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "assets/images/logo1.png",
-                          height: 30,
-                          width: 30,
-                        ),
-                        const Text(
-                          "  QRange",
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    )),
+                    // enabled: false,
+                    child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/slider", (_) => false);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/images/logo1.png",
+                        height: 30,
+                        width: 30,
+                      ),
+                      const Text(
+                        "  QRange",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                )),
                 if (!kIsWeb)
                   PopupMenuItem<dynamic>(
                     child: ListTile(
@@ -331,9 +381,15 @@ class _MobileQRState extends State<MobileQR> {
                         // context.vxNav.push(Uri.parse("/scan"));
                       },
                       // leading: Icon(Icons.add, color: Colors.white),
-                      title: const Text(
-                        "Scan QR",
-                        style: TextStyle(color: Colors.white),
+                      title: Row(
+                        children: const <Widget>[
+                          Icon(Icons.camera),
+                          SizedBox(width: 10),
+                          Text(
+                            "Scan QR",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -348,51 +404,79 @@ class _MobileQRState extends State<MobileQR> {
                       // context.vxNav.push(Uri.parse("/createqr"));
                     },
                     // leading: Icon(Icons.anchor, color: Colors.white),
-                    title: const Text("Create QR",
-                        style: TextStyle(color: Colors.white)),
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.qr_code),
+                        SizedBox(width: 10),
+                        Text("Create QR",
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ),
                 // const PopupMenuDivider(
                 //   height: 20,
                 // ),
-                const PopupMenuItem<dynamic>(
+                PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.privacyPolicy,
                     // leading: Icon(Icons.anchor, color: Colors.white),
-                    title: Text("Privacy Policy",
-                        style: TextStyle(color: Colors.white)),
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.security),
+                        SizedBox(width: 10),
+                        Text("Privacy Policy",
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ),
                 // const PopupMenuDivider(
                 //   height: 20,
                 // ),
-                const PopupMenuItem<dynamic>(
+                PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.rateus,
                     // leading: Icon(Icons.anchor, color: Colors.white),
-                    title:
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.star),
+                        SizedBox(width: 10),
                         Text("Rate us", style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ),
                 // const PopupMenuDivider(
                 //   height: 20,
                 // ),
-                const PopupMenuItem<dynamic>(
+                PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.aboutus,
                     // leading: Icon(Icons.anchor, color: Colors.white),
-                    title:
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.info),
+                        SizedBox(width: 10),
                         Text("About us", style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ),
                 // const PopupMenuDivider(
                 //   height: 20,
                 // ),
-                const PopupMenuItem<dynamic>(
+                PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.share,
                     // leading: Icon(Icons.anchor, color: Colors.white),
-                    title: Text("Share", style: TextStyle(color: Colors.white)),
+                    title: Row(
+                      children: const <Widget>[
+                        Icon(Icons.share),
+                        SizedBox(width: 10),
+                        Text("Share", style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -413,12 +497,23 @@ class _MobileQRState extends State<MobileQR> {
                       Center(
                         child: Container(
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red,width: 5)),
+                                border:
+                                    Border.all(color: Colors.red, width: 5)),
                             width: MediaQuery.of(context).size.width * 0.80,
                             height: MediaQuery.of(context).size.width * 0.80,
                             child: RepaintBoundary(
-                                key: _globalKey, child: buildQR())),
+                                key: _globalKey, child: buildQR1())),
                       ),
+                      Center(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.red, width: 5)),
+                            width: MediaQuery.of(context).size.width * 0.80,
+                            height: MediaQuery.of(context).size.width * 0.80,
+                            child: buildQR()),
+                      ),
+
                       // Container(
                       //   alignment: Alignment.bottomRight,
                       //   padding: const EdgeInsets.only(right: 15),
@@ -497,7 +592,7 @@ class _MobileQRState extends State<MobileQR> {
                             ..click();
                         } else if (Platform.isAndroid) {
                           final Uint8List image =
-                              await controller.captureFromWidget(buildQR());
+                              await controller.captureFromWidget(buildQR1());
 
                           await saveImage(image);
                         }
@@ -568,7 +663,7 @@ class _MobileQRState extends State<MobileQR> {
                           ),
                       onPressed: () async {
                         final Uint8List image =
-                            await controller.captureFromWidget(buildQR());
+                            await controller.captureFromWidget(buildQR1());
                         saveAndShare(image);
                       },
                       child: SizedBox(
