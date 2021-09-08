@@ -78,13 +78,13 @@ class _ViewQRImageState extends State<ViewQRImage> {
             itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
               PopupMenuItem<dynamic>(
                   // enabled: false,
-                  child: GestureDetector(
+                  child: ListTile(
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/slider", (_) => false);
                 },
-                child: Row(
+                title: Row(
                   children: <Widget>[
                     Image.asset(
                       "assets/images/logo1.png",

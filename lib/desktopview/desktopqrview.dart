@@ -64,8 +64,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
     }
   }
 
-
-
   Future<dynamic> saveAndShare(Uint8List bytes) async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File image = File("${directory.path}/flutter.png");
@@ -170,13 +168,13 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                   itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                     PopupMenuItem<dynamic>(
                         // enabled: false,
-                        child: GestureDetector(
+                        child: ListTile(
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushNamedAndRemoveUntil(
                             context, "/slider", (_) => false);
                       },
-                      child: Row(
+                      title: Row(
                         children: <Widget>[
                           Image.asset(
                             "assets/images/logo1.png",
@@ -329,6 +327,32 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                           //   ),
                           // ),
                         ]),
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                      "assets/images/logo2.png",
+                                    ),
+                                    fit: BoxFit.fill,
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                  Text("Powered by Orange DigiSolutions",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      )),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                         ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
@@ -349,7 +373,7 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                                   .toByteData(format: ui.ImageByteFormat.png);
                               pngBytes = byteData!.buffer.asUint8List();
                               debugPrint(widget.url);
-                              
+
                               // ignore: avoid_catches_without_on_clauses
                             } catch (e) {
                               debugPrint("hello");
@@ -364,8 +388,8 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                                 ..download = "QRange $dateToday.png"
                                 ..click();
                             } else if (Platform.isAndroid) {
-                              final Uint8List image =
-                                  await controller.captureFromWidget(buildQR1());
+                              final Uint8List image = await controller
+                                  .captureFromWidget(buildQR1());
                               await saveImage(image);
                             }
                             setState(() {
