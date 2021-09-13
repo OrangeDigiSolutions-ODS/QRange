@@ -2,8 +2,6 @@ import "dart:convert";
 import "dart:io";
 import "dart:typed_data";
 import "dart:ui" as ui;
-// import "package:top_snackbar_flutter/custom_snack_bar.dart";
-// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:universal_html/html.dart" as html;
 import "package:auto_size_text_pk/auto_size_text_pk.dart";
 import "package:flutter/foundation.dart";
@@ -15,10 +13,9 @@ import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 import "/home/menu.dart";
 
-// ignore: must_be_immutable
 class DesktopQRView extends StatefulWidget {
-  DesktopQRView({required this.url, Key? key}) : super(key: key);
-  String url;
+  const DesktopQRView({required this.url, Key? key}) : super(key: key);
+  final String url;
 
   @override
   _DesktopQRViewState createState() => _DesktopQRViewState();
@@ -39,7 +36,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
   Future<dynamic> saveImage(Uint8List bytes) async {
     Directory? directory = await getExternalStorageDirectory();
     String newPath = "";
-    // print(directory);
     final List<String> paths = directory!.path.split("/");
     for (int x = 1; x < paths.length; x++) {
       final String folder = paths[x];
@@ -130,7 +126,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
-          //Appbar
           appBar: AppBar(
             title: Padding(
               padding: EdgeInsets.only(
@@ -167,7 +162,7 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                   color: const Color(0xff555555),
                   itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                     PopupMenuItem<dynamic>(
-                        // enabled: false,
+                  
                         child: ListTile(
                       onTap: () {
                         Navigator.pop(context);
@@ -194,7 +189,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                           Navigator.pop(context);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/createqr", (_) => false);
-                          // context.vxNav.push(Uri.parse("/createqr"));
                         },
                         title: Row(
                           children: const <Widget>[
@@ -212,7 +206,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                     PopupMenuItem<dynamic>(
                       child: ListTile(
                         onTap: Menu.privacyPolicy,
-                        // leading: Icon(Icons.anchor, color: Colors.white),
                         title: Row(
                           children: const <Widget>[
                             Icon(Icons.security),
@@ -267,20 +260,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                           ),
                         ),
                         Stack(children: <Widget>[
-                          // Center(
-                          //     child: Container(
-                          //         decoration: BoxDecoration(
-                          //           border: Border.all(
-                          //             color: Colors.red,
-                          //             width: 5,
-                          //           ),
-                          //         ),
-                          //         width:
-                          //             MediaQuery.of(context).size.width * 0.2,
-                          //         height:
-                          //             MediaQuery.of(context).size.height * 0.4,
-                          //         child: RepaintBoundary(
-                          //             key: _globalKey, child: buildQR1()))),
                           Center(
                               child: Container(
                                   decoration: BoxDecoration(
@@ -295,37 +274,6 @@ class _DesktopQRViewState extends State<DesktopQRView> {
                                       MediaQuery.of(context).size.height * 0.4,
                                   child: buildQR())),
 
-                          //code for buttons
-                          // Center(
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(
-                          //         top: MediaQuery.of(context).size.height * 0.36),
-                          //     child: ElevatedButton(
-                          //       style: ButtonStyle(
-                          //           backgroundColor: MaterialStateProperty.all(
-                          //               const Color(0xffDD4C00)),
-                          //           shape: MaterialStateProperty.all<
-                          //                   RoundedRectangleBorder>(
-                          //               RoundedRectangleBorder(
-                          //                   borderRadius: BorderRadius.circular(50),
-                          //                   side: const BorderSide()))),
-                          //       onPressed: () {},
-                          //       child: SizedBox(
-                          //         width: 40,
-                          //         height: 50,
-                          //         child: Row(
-                          //           mainAxisAlignment: MainAxisAlignment.center,
-                          //           children: const <Widget>[
-                          //             Icon(
-                          //               Icons.edit,
-                          //               color: Colors.white,
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ]),
                         Center(
                           child: Column(

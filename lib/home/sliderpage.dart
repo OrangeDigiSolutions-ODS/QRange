@@ -57,7 +57,6 @@ class _SliderPageState extends State<SliderPage> {
       TextEditingController(text: "Cancel");
 
   final double _aspectTolerance = 0;
-  // int _numberOfCameras = 0;
   final int _selectedCamera = -1;
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
@@ -72,7 +71,7 @@ class _SliderPageState extends State<SliderPage> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.65;
-    // final ScanResult? scanResult = this.scanResult;
+  
     return SafeArea(
       child: Container(
         color: const Color(0xffE5E5E5),
@@ -136,7 +135,6 @@ class _SliderPageState extends State<SliderPage> {
               height: MediaQuery.of(context).size.height * 0.1,
             ),
             Container(
-              // color: Colors.white,
               alignment: Alignment.bottomCenter,
               child: ConstrainedBox(
                   constraints: BoxConstraints.tightFor(
@@ -148,32 +146,25 @@ class _SliderPageState extends State<SliderPage> {
                       if (!kIsWeb)
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                // fixedSize: Size(
-                                //     MediaQuery.of(context).size.width * 0.3,
-                                //     50),
+                              
                                 padding: const EdgeInsets.only(
                                     top: 5, right: 10, left: 2, bottom: 5),
                                 primary: Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)),
                                 shadowColor: Colors.grey
-                                // shape:
+                    
                                 ),
                             onPressed: () {
                               showDialog(
                                   context: context,
                                   builder: (_) => AlertDialog(
-                                        // insetPadding: EdgeInsets.all(80),
                                         backgroundColor:
                                             const Color(0xffE5E5E5),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         content: SizedBox(
-                                          // width: MediaQuery.of(context)
-                                          //         .size
-                                          //         .width *
-                                          //     0.15,
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -183,12 +174,10 @@ class _SliderPageState extends State<SliderPage> {
                                                 MainAxisAlignment.center,
                                             children: <Widget>[
                                               SizedBox(
-                                                // width: 150,
+                                                
                                                 child: ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                            // fixedSize: Size(
-                                                            //     MediaQuery.of(context).size.width * 0.3, 50),
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
@@ -206,7 +195,7 @@ class _SliderPageState extends State<SliderPage> {
                                                             shadowColor:
                                                                 Colors.grey),
                                                     onPressed: _scan,
-                                                    // icon: Icon(Icons.camera_alt_outlined,),
+                                                  
                                                     child: Row(
                                                       children: <Widget>[
                                                         Container(
@@ -249,12 +238,9 @@ class _SliderPageState extends State<SliderPage> {
                                                 height: 20,
                                               ),
                                               SizedBox(
-                                                // width: 150,
                                                 child: ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                            // fixedSize: Size(
-                                                            //     MediaQuery.of(context).size.width * 0.45, 50),
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
@@ -271,7 +257,7 @@ class _SliderPageState extends State<SliderPage> {
                                                                             30)),
                                                             shadowColor:
                                                                 Colors.grey
-                                                            // shape:
+                                                        
                                                             ),
                                                     onPressed: () async {
                                                       final List<Media>? res =
@@ -300,8 +286,7 @@ class _SliderPageState extends State<SliderPage> {
                                                                     )));
                                                       }
                                                     },
-                                                    // icon: Icon(Icons.camera_alt_outlined,),
-                                                    child: Row(
+                                                   child: Row(
                                                       children: <Widget>[
                                                         Container(
                                                             padding:
@@ -318,8 +303,7 @@ class _SliderPageState extends State<SliderPage> {
                                                               Icons.collections,
                                                               color:
                                                                   Colors.white,
-                                                              // size: MediaQuery.of(context).size.width *
-                                                              //     0.045,
+                                                                                                                           
                                                             )),
                                                         Text(
                                                           " Scan from Gallery",
@@ -340,15 +324,9 @@ class _SliderPageState extends State<SliderPage> {
                                               ),
                                             ],
                                           ),
-                                          // color: Colors.accents,
                                         ),
                                       ));
                             },
-                            // onPressed: () {
-                            //   // Navigator.pushNamed(context, "/scan");
-                            //   context.vxNav.push(Uri.parse("/scan"));
-                            // },
-                            // icon: Icon(Icons.camera_alt_outlined,),
                             child: Row(
                               children: <Widget>[
                                 Container(
@@ -375,22 +353,20 @@ class _SliderPageState extends State<SliderPage> {
                       if (!kIsWeb) const SizedBox(width: 5),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              // fixedSize: Size(
-                              //     MediaQuery.of(context).size.width * 0.45, 50),
                               padding: const EdgeInsets.only(
                                   top: 5, right: 10, left: 2, bottom: 5),
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               shadowColor: Colors.grey
-                              // shape:
+                            
                               ),
                           onPressed: () {
                             Navigator.pushNamed(context, "/createqr");
 
-                            // context.vxNav.push(Uri.parse("/createqr"));
+                    
                           },
-                          // icon: Icon(Icons.camera_alt_outlined,),
+                    
                           child: Row(
                             children: <Widget>[
                               Container(
@@ -401,8 +377,6 @@ class _SliderPageState extends State<SliderPage> {
                                   child: const Icon(
                                     Icons.qr_code,
                                     color: Colors.white,
-                                    // size: MediaQuery.of(context).size.width *
-                                    //     0.045,
                                   )),
                               const AutoSizeText(
                                 " Create QR",

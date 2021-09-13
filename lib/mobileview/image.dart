@@ -6,8 +6,6 @@ import "package:file_picker/file_picker.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:images_picker/images_picker.dart";
-// import "package:top_snackbar_flutter/custom_snack_bar.dart";
-// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:uuid/uuid.dart";
 import "/firebase/imageuploader.dart";
 import "mobileqr.dart";
@@ -75,7 +73,6 @@ class _ImageCatState extends State<ImageCat> {
                         ],
                       ))),
 
-              //code for buttons
               Container(
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.58),
@@ -90,27 +87,12 @@ class _ImageCatState extends State<ImageCat> {
                               padding: const EdgeInsets.only(
                                   top: 5, right: 2, left: 5, bottom: 5),
                               primary: const Color(0xFFFFFFFF),
-                              // shape: const CircleBorder(),
+                            
                               shadowColor: Colors.grey,
                               shape: const StadiumBorder()
-                              // shape:
+                      
                               ),
-                          // style: ButtonStyle(
-                          //     backgroundColor: MaterialStateProperty.all(
-                          //         const Color(0xffDD4C00)),
-                          //     shape: MaterialStateProperty.all<
-                          //             RoundedRectangleBorder>(
-                          //         RoundedRectangleBorder(
-                          //             borderRadius: BorderRadius.circular(50),
-                          //             side: const BorderSide()))),
-                          // style: ButtonStyle(
-                          //     backgroundColor: MaterialStateProperty.all(
-                          //         const Color(0xffDD4C00)),
-                          //     shape: MaterialStateProperty.all<
-                          //             RoundedRectangleBorder>(
-                          //         RoundedRectangleBorder(
-                          //             borderRadius: BorderRadius.circular(50),
-                          //             side: const BorderSide()))),
+                         
                           onPressed: () {
                             if (path1.isNotEmpty && waiting == false) {
                               uuid = const Uuid();
@@ -146,23 +128,13 @@ class _ImageCatState extends State<ImageCat> {
                               }
                             } else {
                               if (waiting == true) {
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "wait until file upload",
-                                //   ),
-                                // );
+                                
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content:
                                             Text("wait until file upload")));
                               } else {
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "Please select a image file first.",
-                                //   ),
-                                // );
+                                
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text(
@@ -171,10 +143,7 @@ class _ImageCatState extends State<ImageCat> {
                             }
                           },
                           child: SizedBox(
-                            // height: 50,
-                            // width: 50,
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 if (waiting == false)
                                   Container(
@@ -187,8 +156,6 @@ class _ImageCatState extends State<ImageCat> {
                                       child: const Icon(
                                         Icons.check,
                                         color: Colors.white,
-                                        // size: MediaQuery.of(context).size.width *
-                                        //     0.045,
                                       ))
                                 else
                                   const CircularProgressIndicator(),
@@ -216,7 +183,7 @@ class _ImageCatState extends State<ImageCat> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             shadowColor: Colors.grey
-                            // shape:
+                          
                             ),
                         onPressed: () async {
                           List<String> img = <String>[];
@@ -235,7 +202,6 @@ class _ImageCatState extends State<ImageCat> {
                           width: MediaQuery.of(context).size.width * 0.50,
                           height: MediaQuery.of(context).size.height * 0.07,
                           child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               if (path1.isNotEmpty || path2.isNotEmpty)
                                 Row(
@@ -253,8 +219,6 @@ class _ImageCatState extends State<ImageCat> {
                                         child: const Icon(
                                           Icons.photo_camera,
                                           color: Colors.white,
-                                          // size: MediaQuery.of(context).size.width *
-                                          //     0.045,
                                         )),
                                     const SizedBox(width: 10),
                                     const Center(
@@ -285,8 +249,6 @@ class _ImageCatState extends State<ImageCat> {
                                         child: const Icon(
                                           Icons.photo_camera,
                                           color: Colors.white,
-                                          // size: MediaQuery.of(context).size.width *
-                                          //     0.045,
                                         )),
                                     const SizedBox(width: 10),
                                     const Center(
@@ -338,7 +300,7 @@ class _ImageCatState extends State<ImageCat> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             shadowColor: Colors.grey
-                            // shape:
+                            
                             ),
                         onPressed: () async {
                           List<String> img1 = <String>[];
@@ -364,7 +326,6 @@ class _ImageCatState extends State<ImageCat> {
                           width: MediaQuery.of(context).size.width * 0.50,
                           height: MediaQuery.of(context).size.height * 0.07,
                           child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               if (kIsWeb)
                                 Row(
@@ -382,8 +343,6 @@ class _ImageCatState extends State<ImageCat> {
                                         child: const Icon(
                                           Icons.collections,
                                           color: Colors.white,
-                                          // size: MediaQuery.of(context).size.width *
-                                          //     0.045,
                                         )),
                                     const AutoSizeText(
                                       " Upload Images",
@@ -411,8 +370,6 @@ class _ImageCatState extends State<ImageCat> {
                                         child: const Icon(
                                           Icons.collections,
                                           color: Colors.white,
-                                          // size: MediaQuery.of(context).size.width *
-                                          //     0.045,
                                         )),
                                     const AutoSizeText(
                                       " Add Gallery",
@@ -440,8 +397,7 @@ class _ImageCatState extends State<ImageCat> {
                                         child: const Icon(
                                           Icons.collections,
                                           color: Colors.white,
-                                          // size: MediaQuery.of(context).size.width *
-                                          //     0.045,
+
                                         )),
                                     const AutoSizeText(
                                       " Import Gallery",
@@ -458,17 +414,7 @@ class _ImageCatState extends State<ImageCat> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(18),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     crossAxisAlignment: CrossAxisAlignment.end,
-                    //     children: const <Widget>[
-                    //       // Text("Swipe Up",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                    //       AnimatedSlideUp()
-                    //     ],
-                    //   ),
-                    // ),
+                    
                   ],
                 ),
               ),
@@ -509,17 +455,9 @@ class _ImageCatState extends State<ImageCat> {
       });
     });
 
-    // context.vxNav.push(Uri.parse("/mobileqr"),
-    //     params: "https://crud-operation-cdbf0.web.app/images/viewqr?id=$v4");
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("File upload successfully")));
 
-    // showTopSnackBar(
-    //   context,
-    //   const CustomSnackBar.success(
-    //     message: "File upload successfully",
-    //   ),
-    // );
   }
 
   Widget slider(GlobalKey<CarouselSliderState> sslkey) =>
@@ -532,15 +470,12 @@ class _ImageCatState extends State<ImageCat> {
         itemCount: path1.length,
         key: sslkey,
         itemBuilder: (_, __, ___) => SizedBox(
-          // height: MediaQuery.of(context).size.height * 0.50,
           width: double.infinity,
           child: Stack(children: <Widget>[
             Center(
               child: GestureDetector(
                 child: Image.file(
                   File(path1[__]),
-                  // fit: BoxFit.contain,
-                  // height: MediaQuery.of(context).size.height * 0.50,
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
@@ -558,28 +493,6 @@ class _ImageCatState extends State<ImageCat> {
                   icon: const Icon(Icons.close)),
             ),
             
-            // Container(
-            //   alignment: Alignment.centerLeft,
-            //   margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            //   child: IconButton(
-            //       onPressed: () {
-            //         sslkey.currentState!.pageController!.previousPage(
-            //             duration: const Duration(milliseconds: 300),
-            //             curve: Curves.linear);
-            //       },
-            //       icon: const Icon(Icons.keyboard_arrow_left)),
-            // ),
-            // Container(
-            //   alignment: Alignment.centerRight,
-            //   margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-            //   child: IconButton(
-            //       onPressed: () {
-            //         sslkey.currentState!.pageController!.nextPage(
-            //             duration: const Duration(milliseconds: 300),
-            //             curve: Curves.linear);
-            //       },
-            //       icon: const Icon(Icons.keyboard_arrow_right)),
-            // ),
           ]),
         ),
       );
@@ -593,15 +506,12 @@ class _ImageCatState extends State<ImageCat> {
         itemCount: path2.length,
         key: sslkey,
         itemBuilder: (_, __, ___) => SizedBox(
-          // height: MediaQuery.of(context).size.height * 0.50,
           width: double.infinity,
           child: Stack(children: <Widget>[
             Center(
               child: GestureDetector(
                 child: Image.memory(
                   path2[__],
-                  // fit: BoxFit.contain,
-                  // height: MediaQuery.of(context).size.height * 0.50,
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
@@ -618,28 +528,6 @@ class _ImageCatState extends State<ImageCat> {
                   },
                   icon: const Icon(Icons.close)),
             ),
-            // Container(
-            //   alignment: Alignment.centerLeft,
-            //   margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            //   child: IconButton(
-            //       onPressed: () {
-            //         sslkey.currentState!.pageController!.previousPage(
-            //             duration: const Duration(milliseconds: 300),
-            //             curve: Curves.linear);
-            //       },
-            //       icon: const Icon(Icons.keyboard_arrow_left)),
-            // ),
-            // Container(
-            //   alignment: Alignment.centerRight,
-            //   margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-            //   child: IconButton(
-            //       onPressed: () {
-            //         sslkey.currentState!.pageController!.nextPage(
-            //             duration: const Duration(milliseconds: 300),
-            //             curve: Curves.linear);
-            //       },
-            //       icon: const Icon(Icons.keyboard_arrow_right)),
-            // ),
           ]),
         ),
       );

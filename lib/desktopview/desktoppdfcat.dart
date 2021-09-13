@@ -6,8 +6,6 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_dropzone/flutter_dropzone.dart";
 import "package:syncfusion_flutter_pdfviewer/pdfviewer.dart";
-// import "package:top_snackbar_flutter/custom_snack_bar.dart";
-// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:uuid/uuid.dart";
 import "/firebase/pdfuploader.dart";
 import "desktopqrview.dart";
@@ -31,7 +29,6 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
             color: const Color(0xFF4E4E4E),
             child: Center(
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   const Text(
@@ -71,7 +68,6 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                                 width: MediaQuery.of(context).size.width * 0.25,
                                 height:
                                     MediaQuery.of(context).size.height * 0.4,
-                                // color: Colors.blue,
                                 child: buildDecoration(
                                     child: Stack(
                                   children: <Widget>[
@@ -120,8 +116,6 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                         ],
                       ),
                     ),
-
-                    //code for buttons
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(
@@ -133,9 +127,7 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
-                              shadowColor: Colors.grey
-                              // shape:
-                              ),
+                              shadowColor: Colors.grey),
                           onPressed: () async {
                             if (kIsWeb) {
                               final FilePickerResult? bytesFromPicker =
@@ -151,12 +143,7 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                                         const SnackBar(
                                             content: Text(
                                                 "File selected successfully")));
-                                    // showTopSnackBar(
-                                    //   context,
-                                    //   const CustomSnackBar.success(
-                                    //     message: "File selected successfully",
-                                    //   ),
-                                    // );
+
                                     final List<Uint8List?> res = bytesFromPicker
                                         .files
                                         .map((_) => _.bytes)
@@ -170,13 +157,6 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                                       const SnackBar(
                                           content: Text(
                                               "Please select a file less than 10 mb")));
-                                  // showTopSnackBar(
-                                  //   context,
-                                  //   const CustomSnackBar.error(
-                                  //     message:
-                                  //         "Please select a file less than 10 mb",
-                                  //   ),
-                                  // );
                                 });
                               }
                             }
@@ -216,9 +196,7 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                           primary: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
-                          shadowColor: Colors.grey
-                          // shape:
-                          ),
+                          shadowColor: Colors.grey),
                       onPressed: () {
                         if (path1 != null && waiting == false) {
                           final String v4 = uuid.v4();
@@ -236,48 +214,26 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                                 path1 = null;
                               });
                             });
-                            // context.vxNav
-                            //     .push(Uri.parse("/desktopqr"), params: __);
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text("File upload successfully")));
-                            // showTopSnackBar(
-                            //   context,
-                            //   const CustomSnackBar.success(
-                            //     message: "File upload successfully",
-                            //   ),
-                            // );
                           });
                         } else {
                           if (waiting == true) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text("wait until file upload")));
-                            // showTopSnackBar(
-                            //   context,
-                            //   const CustomSnackBar.error(
-                            //     message: "wait until file upload",
-                            //   ),
-                            // );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
                                         "Please select a pdf file first.")));
-                            // showTopSnackBar(
-                            //   context,
-                            //   const CustomSnackBar.error(
-                            //     message: "Please select a pdf file first.",
-                            //   ),
-                            // );
                           }
                         }
                       },
                       child: SizedBox(
                         width: 200,
-                        // height: 50,
                         child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             if (waiting == false)
                               Container(
@@ -289,8 +245,6 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
                                   child: const Icon(
                                     Icons.check,
                                     color: Colors.white,
-                                    // size: MediaQuery.of(context).size.width *
-                                    //     0.045,
                                   ))
                             else
                               const CircularProgressIndicator(),
@@ -317,24 +271,13 @@ class _DesktopPDFCatState extends State<DesktopPDFCat> {
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("File selected successfully")));
-        // showTopSnackBar(
-        //   context,
-        //   const CustomSnackBar.success(
-        //     message: "File selected successfully",
-        //   ),
-        // );
+
         path1 = path2;
       });
     } else {
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Please select a file less than 10 mb")));
-        // showTopSnackBar(
-        //   context,
-        //   const CustomSnackBar.error(
-        //     message: "Please select a file less than 10 mb",
-        //   ),
-        // );
       });
     }
     return path1;

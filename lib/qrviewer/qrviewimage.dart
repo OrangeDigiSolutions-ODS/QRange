@@ -13,19 +13,16 @@ import "/home/scanpage.dart";
 
 // ignore: must_be_immutable
 class ViewQRImage extends StatefulWidget {
-  ViewQRImage({
-    this.uri,
+  const ViewQRImage({
+    required this.uri,
     Key? key,
   }) : super(key: key);
-  String? uri;
+  final String uri;
   @override
-  // ignore: no_logic_in_create_state
-  _ViewQRImageState createState() => _ViewQRImageState(uri!);
+  _ViewQRImageState createState() => _ViewQRImageState();
 }
 
 class _ViewQRImageState extends State<ViewQRImage> {
-  _ViewQRImageState(this.uri);
-  String uri;
   final GlobalKey<CarouselSliderState> sslKey = GlobalKey();
   ScanResult? scanResult;
   final TextEditingController _flashOnController =
@@ -36,7 +33,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
       TextEditingController(text: "Cancel");
 
   final double _aspectTolerance = 0;
-  // int _numberOfCameras = 0;
   final int _selectedCamera = -1;
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
@@ -54,16 +50,14 @@ class _ViewQRImageState extends State<ViewQRImage> {
   Widget build(BuildContext context) {
     String? urisplit;
     setState(() {
-      urisplit = uri.split("=").last;
+      urisplit = widget.uri.split("=").last;
     });
-    // if (urisplit!.contains(uri) == true) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Image Preview",
           style: TextStyle(color: Colors.black),
         ),
-        // backwardsCompatibility: false,
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xffDDDDDD),
         actions: <Widget>[
@@ -73,11 +67,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
               color: Colors.black,
             ),
             iconSize: 30,
-            // offset: const Offset(0, 60),
             color: const Color(0xff555555),
             itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
               PopupMenuItem<dynamic>(
-                  // enabled: false,
                   child: ListTile(
                 onTap: () {
                   Navigator.pop(context);
@@ -105,24 +97,18 @@ class _ViewQRImageState extends State<ViewQRImage> {
                       showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                                // insetPadding: EdgeInsets.all(80),
                                 backgroundColor: const Color(0xffE5E5E5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 content: SizedBox(
-                                  // width:
-                                  //     MediaQuery.of(context).size.width * 0.15,
                                   height:
                                       MediaQuery.of(context).size.height * 0.2,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       SizedBox(
-                                        // width: 150,
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                                // fixedSize: Size(
-                                                //     MediaQuery.of(context).size.width * 0.3, 50),
                                                 padding: const EdgeInsets.only(
                                                     top: 5,
                                                     right: 15,
@@ -135,19 +121,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                                             30)),
                                                 shadowColor: Colors.grey),
                                             onPressed: _scan,
-                                            // if (scanResult != null) {
-                                            //   Navigator.push(
-                                            //       context,
-                                            //       MaterialPageRoute<dynamic>(
-                                            //           builder: (_) =>
-                                            //               ScanCopy(
-                                            //                 scantext:
-                                            //                     scanResult!
-                                            //                         .rawContent,
-                                            //               )));
-                                            // }
-                                            // },
-                                            // icon: Icon(Icons.camera_alt_outlined,),
                                             child: Row(
                                               children: <Widget>[
                                                 Container(
@@ -186,11 +159,8 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                         height: 20,
                                       ),
                                       SizedBox(
-                                        // width: 150,
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                                // fixedSize: Size(
-                                                //     MediaQuery.of(context).size.width * 0.45, 50),
                                                 padding: const EdgeInsets.only(
                                                     top: 5,
                                                     right: 20,
@@ -202,7 +172,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                                         BorderRadius.circular(
                                                             30)),
                                                 shadowColor: Colors.grey
-                                                // shape:
                                                 ),
                                             onPressed: () async {
                                               final List<Media>? res =
@@ -228,7 +197,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                                             )));
                                               }
                                             },
-                                            // icon: Icon(Icons.camera_alt_outlined,),
                                             child: Row(
                                               children: <Widget>[
                                                 Container(
@@ -243,8 +211,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                                     child: const Icon(
                                                       Icons.collections,
                                                       color: Colors.white,
-                                                      // size: MediaQuery.of(context).size.width *
-                                                      //     0.045,
                                                     )),
                                                 Text(
                                                   " Scan from Gallery",
@@ -263,16 +229,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
                                       ),
                                     ],
                                   ),
-                                  // color: Colors.accents,
                                 ),
                               ));
-
-                      // // Navigator.pop(context);
-                      // // Navigator.pushNamedAndRemoveUntil(
-                      // //     context, "/scan", (_) => false);
-                      // context.vxNav.push(Uri.parse("/scan"));
                     },
-                    // leading: Icon(Icons.add, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.camera),
@@ -285,17 +244,12 @@ class _ViewQRImageState extends State<ViewQRImage> {
                     ),
                   ),
                 ),
-              // const PopupMenuDivider(
-              //   height: 20,
-              // ),
               PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushNamed(context, "/createqr");
-                    // context.vxNav.push(Uri.parse("/createqr"));
                   },
-                  // leading: Icon(Icons.anchor, color: Colors.white),
                   title: Row(
                     children: const <Widget>[
                       Icon(Icons.qr_code),
@@ -305,13 +259,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
                   ),
                 ),
               ),
-              // const PopupMenuDivider(
-              //   height: 20,
-              // ),
               PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.privacyPolicy,
-                  // leading: Icon(Icons.anchor, color: Colors.white),
                   title: Row(
                     children: const <Widget>[
                       Icon(Icons.security),
@@ -322,13 +272,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
                   ),
                 ),
               ),
-              // const PopupMenuDivider(
-              //   height: 20,
-              // ),
               PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.rateus,
-                  // leading: Icon(Icons.anchor, color: Colors.white),
                   title: Row(
                     children: const <Widget>[
                       Icon(Icons.star),
@@ -338,13 +284,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
                   ),
                 ),
               ),
-              // const PopupMenuDivider(
-              //   height: 20,
-              // ),
               PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.aboutus,
-                  // leading: Icon(Icons.anchor, color: Colors.white),
                   title: Row(
                     children: const <Widget>[
                       Icon(Icons.info),
@@ -354,13 +296,9 @@ class _ViewQRImageState extends State<ViewQRImage> {
                   ),
                 ),
               ),
-              // const PopupMenuDivider(
-              //   height: 20,
-              // ),
               PopupMenuItem<dynamic>(
                 child: ListTile(
                   onTap: Menu.share,
-                  // leading: Icon(Icons.anchor, color: Colors.white),
                   title: Row(
                     children: const <Widget>[
                       Icon(Icons.share),
@@ -387,7 +325,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                 final List<int> itemabx = <int>[];
                 List<dynamic> imageurl1 = <dynamic>[];
                 final int data = int.parse(__.data!["image"].toString());
-                // print(data);
 
                 return FutureBuilder<DocumentSnapshot<Object>>(
                     future: images
@@ -414,13 +351,11 @@ class _ViewQRImageState extends State<ViewQRImage> {
                               height: MediaQuery.of(context).size.height,
                               viewportFraction: 1,
 
-                              // aspectRatio: 1,
                             ),
                             itemCount: imageurl1.length,
                             key: sslKey,
                             itemBuilder: (_, __, ___) => Card(
                               margin: const EdgeInsets.all(5),
-                              // color: ColorCode.orange,
                               child: Stack(children: <Widget>[
                                 Center(
                                   child: Image(
@@ -467,7 +402,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
                         child: CircularProgressIndicator(),
                       );
                     });
-                // : Image.asset("assets/Artboard.png");
               }
               return const Center(
                 child: CircularProgressIndicator(),
@@ -477,11 +411,6 @@ class _ViewQRImageState extends State<ViewQRImage> {
         ),
       ),
     );
-    // }
-    // return const Text("hello");
-    // Center(
-    //   child: CircularProgressIndicator(),
-    // );
   }
 
   Future<void> _scan() async {

@@ -2,11 +2,7 @@ import "package:auto_size_text_pk/auto_size_text_pk.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-
 import "desktopqrview.dart";
-// import "package:top_snackbar_flutter/custom_snack_bar.dart";
-// import "package:top_snackbar_flutter/top_snack_bar.dart";
-// import "desktopqrview.dart";
 
 class DesktopUrlCat extends StatefulWidget {
   const DesktopUrlCat({Key? key}) : super(key: key);
@@ -24,7 +20,6 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
             color: const Color(0xFF4E4E4E),
             child: Center(
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   const Text(
@@ -37,10 +32,6 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          // SizedBox(
-                          //     width: MediaQuery.of(context).size.width * 0.25,
-                          //     height: MediaQuery.of(context).size.height * 0.4,
-                          // color: Colors.blue,
                           const AutoSizeText(
                             "Enter URL to generate QR",
                             minFontSize: 18,
@@ -60,12 +51,9 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
                               ),
                             ),
                           ),
-                          // ),
                         ],
                       ),
                     ),
-
-                    //code for buttons
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(
@@ -77,9 +65,7 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
-                              shadowColor: Colors.grey
-                              // shape:
-                              ),
+                              shadowColor: Colors.grey),
                           onPressed: () {
                             if (urlController.text.contains("http")) {
                               Navigator.push(
@@ -95,9 +81,7 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
                           },
                           child: SizedBox(
                             width: 200,
-                            // height: 50,
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 Container(
                                     padding: const EdgeInsets.only(
@@ -109,8 +93,6 @@ class _DesktopUrlCatState extends State<DesktopUrlCat> {
                                     child: const Icon(
                                       Icons.check,
                                       color: Colors.white,
-                                      // size: MediaQuery.of(context).size.width *
-                                      //     0.045,
                                     )),
                                 const AutoSizeText(
                                   "  Generated QR",

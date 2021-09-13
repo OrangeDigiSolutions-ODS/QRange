@@ -11,19 +11,16 @@ import "package:syncfusion_flutter_pdfviewer/pdfviewer.dart";
 import "/home/menu.dart";
 import "/home/scanpage.dart";
 
-// ignore: must_be_immutable
+
 class ViewQRPDF extends StatefulWidget {
-  ViewQRPDF({required this.url, Key? key}) : super(key: key);
-  String? url;
+  const ViewQRPDF({required this.url, Key? key}) : super(key: key);
+  final String url;
 
   @override
-  // ignore: no_logic_in_create_state
-  _ViewQRPDFState createState() => _ViewQRPDFState(url!);
+  _ViewQRPDFState createState() => _ViewQRPDFState();
 }
 
 class _ViewQRPDFState extends State<ViewQRPDF> {
-  _ViewQRPDFState(this.url);
-  String url;
   ScanResult? scanResult;
   final TextEditingController _flashOnController =
       TextEditingController(text: "Flash on");
@@ -33,7 +30,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
       TextEditingController(text: "Cancel");
 
   final double _aspectTolerance = 0;
-  // int _numberOfCameras = 0;
   final int _selectedCamera = -1;
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
@@ -46,7 +42,7 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
   @override
   void initState() {
     super.initState();
-    _downloadFile(url, "ssc.pdf");
+    _downloadFile(widget.url, "ssc.pdf");
   }
 
   File? ssc;
@@ -71,7 +67,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
             "PDF Preview",
             style: TextStyle(color: Colors.black),
           ),
-          // backwardsCompatibility: false,
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xffDDDDDD),
           actions: <Widget>[
@@ -81,11 +76,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                 color: Colors.black,
               ),
               iconSize: 30,
-              // offset: const Offset(0, 60),
               color: const Color(0xff555555),
               itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                 PopupMenuItem<dynamic>(
-                    // enabled: false,
                     child: ListTile(
                   onTap: () {
                     Navigator.pop(context);
@@ -113,13 +106,10 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                         showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
-                                  // insetPadding: EdgeInsets.all(80),
                                   backgroundColor: const Color(0xffE5E5E5),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   content: SizedBox(
-                                    // width: MediaQuery.of(context).size.width *
-                                    //     0.15,
                                     height: MediaQuery.of(context).size.height *
                                         0.2,
                                     child: Column(
@@ -127,11 +117,8 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                           MainAxisAlignment.center,
                                       children: <Widget>[
                                         SizedBox(
-                                          // width: 150,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  // fixedSize: Size(
-                                                  //     MediaQuery.of(context).size.width * 0.3, 50),
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 5,
@@ -145,20 +132,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                                               30)),
                                                   shadowColor: Colors.grey),
                                               onPressed: _scan,
-                                              // if (scanResult != null) {
-                                              //   Navigator.push(
-                                              //       context,
-                                              //       MaterialPageRoute<
-                                              //               dynamic>(
-                                              //           builder: (_) =>
-                                              //               ScanCopy(
-                                              //                 scantext:
-                                              //                     scanResult!
-                                              //                         .rawContent,
-                                              //               )));
-                                              // }
-                                              // },
-                                              // icon: Icon(Icons.camera_alt_outlined,),
                                               child: Row(
                                                 children: <Widget>[
                                                   Container(
@@ -198,11 +171,8 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                           height: 20,
                                         ),
                                         SizedBox(
-                                          // width: 150,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  // fixedSize: Size(
-                                                  //     MediaQuery.of(context).size.width * 0.45, 50),
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 5,
@@ -215,7 +185,7 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                                           BorderRadius.circular(
                                                               30)),
                                                   shadowColor: Colors.grey
-                                                  // shape:
+                                                
                                                   ),
                                               onPressed: () async {
                                                 final List<Media>? res =
@@ -243,7 +213,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                                               )));
                                                 }
                                               },
-                                              // icon: Icon(Icons.camera_alt_outlined,),
                                               child: Row(
                                                 children: <Widget>[
                                                   Container(
@@ -260,8 +229,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                                       child: const Icon(
                                                         Icons.collections,
                                                         color: Colors.white,
-                                                        // size: MediaQuery.of(context).size.width *
-                                                        //     0.045,
                                                       )),
                                                   Text(
                                                     " Scan from Gallery",
@@ -280,16 +247,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                                         ),
                                       ],
                                     ),
-                                    // color: Colors.accents,
                                   ),
                                 ));
-
-                        // // Navigator.pop(context);
-                        // // Navigator.pushNamedAndRemoveUntil(
-                        // //     context, "/scan", (_) => false);
-                        // context.vxNav.push(Uri.parse("/scan"));
                       },
-                      // leading: Icon(Icons.add, color: Colors.white),
                       title: Row(
                         children: const <Widget>[
                           Icon(Icons.camera),
@@ -302,17 +262,12 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                       ),
                     ),
                   ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.pushNamed(context, "/createqr");
-                      // context.vxNav.push(Uri.parse("/createqr"));
                     },
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.qr_code),
@@ -323,13 +278,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.privacyPolicy,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.security),
@@ -340,13 +291,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.rateus,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.star),
@@ -356,13 +303,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.aboutus,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.info),
@@ -372,13 +315,9 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.share,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.share),
@@ -399,7 +338,6 @@ class _ViewQRPDFState extends State<ViewQRPDF> {
           return const Center(child: CircularProgressIndicator());
         }),
       );
-  // Container(child: SfPdfViewer.file(ssc!));
   Future<void> _scan() async {
     try {
       final ScanResult result = await BarcodeScanner.scan(

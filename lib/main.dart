@@ -16,9 +16,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
-  //   DevicePreview(
-  //       enabled: !kReleaseMode, builder: (_) => const MyApp()),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,14 +36,14 @@ class MyApp extends StatelessWidget {
             final String? postid = setttingsUri.queryParameters["id"];
             return MaterialPageRoute<dynamic>(
                 builder: (_) => ViewQRImage(
-                      uri: postid,
+                      uri: postid!,
                     ));
           } else if (__.name!.contains("pdf/viewqr")) {
             final Uri setttingsUri = Uri.parse(__.name!);
             final String? postid = setttingsUri.queryParameters["id"];
             return MaterialPageRoute<dynamic>(
                 builder: (_) => ViewQRPDF(
-                      url: postid,
+                      url: postid!,
                     ));
           }
         },
@@ -58,7 +55,6 @@ class MyApp extends StatelessWidget {
               MobileQR(url: "https://www.orangedigisolutions.com/"),
           "/desktopqr": (_) =>
               DesktopQRView(url: "https://www.orangedigisolutions.com/"),
-          
         },
       );
 }
@@ -75,14 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      // if (kIsWeb) {
-      //   Navigator.pushNamedAndRemoveUntil(
-      //       context, "/desktopslider", (_) => false);
-      //   // context.vxNav.clearAndPush(Uri.parse("/createqr"));
-      // } else {
       Navigator.pushNamedAndRemoveUntil(context, "/slider", (_) => false);
-      // context.vxNav.clearAndPush(Uri.parse("/slider"));
-      // }
+     
     });
   }
 
@@ -90,7 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color(0xffEDEEF1),
         body: Stack(
-          // mainAxisAlignment: MainAxisAlignment.,
           children: <Widget>[
             Center(
               child: SizedBox(
@@ -101,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   width: 100,
                   height: 100,
-                  // fit: BoxFit.cover,
                 ),
               ),
             ),

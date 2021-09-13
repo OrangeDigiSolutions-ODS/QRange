@@ -5,8 +5,6 @@ import "package:file_picker/file_picker.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:syncfusion_flutter_pdfviewer/pdfviewer.dart";
-// import "package:top_snackbar_flutter/custom_snack_bar.dart";
-// import "package:top_snackbar_flutter/top_snack_bar.dart";
 import "package:uuid/uuid.dart";
 import "/firebase/pdfuploader.dart";
 import "mobileqr.dart";
@@ -80,8 +78,6 @@ class _PdfCatState extends State<PdfCat> {
                               ])
                       ],
                     ))),
-
-            //code for buttons
             Container(
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.58),
@@ -96,10 +92,10 @@ class _PdfCatState extends State<PdfCat> {
                             padding: const EdgeInsets.only(
                                 top: 5, right: 2, left: 2, bottom: 5),
                             primary: const Color(0xFFFFFFFF),
-                            // shape: const CircleBorder(),
+                          
                             shadowColor: Colors.grey,
                             shape: const StadiumBorder()
-                            // shape:
+                      
                             ),
                         onPressed: () {
                           if (kIsWeb) {
@@ -119,27 +115,15 @@ class _PdfCatState extends State<PdfCat> {
                                     waiting = false;
                                   });
                                 });
-                                // context.vxNav
-                                //     .push(Uri.parse("/mobileqr"), params: __);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content:
                                             Text("File upload successfully")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.success(
-                                //     message: "File upload successfully",
-                                //   ),
-                                // );
+                             
                               });
                             } else {
                               if (waiting == true) {
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "wait until file upload",
-                                //   ),
-                                // );
+                             
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content:
@@ -149,12 +133,7 @@ class _PdfCatState extends State<PdfCat> {
                                     const SnackBar(
                                         content: Text(
                                             "Please select a pdf file first.")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "Please select a pdf file first.",
-                                //   ),
-                                // );
+                                
                               }
                             }
                           } else if (Platform.isAndroid) {
@@ -174,18 +153,11 @@ class _PdfCatState extends State<PdfCat> {
                                     waiting = false;
                                   });
                                 });
-                                // context.vxNav
-                                //     .push(Uri.parse("/mobileqr"), params: __);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content:
                                             Text("File upload successfully")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.success(
-                                //     message: "File upload successfully",
-                                //   ),
-                                // );
+                              
                               });
                             } else {
                               if (waiting == true) {
@@ -193,30 +165,19 @@ class _PdfCatState extends State<PdfCat> {
                                     const SnackBar(
                                         content:
                                             Text("wait until file upload")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "wait until file upload",
-                                //   ),
-                                // );
+                               
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text(
                                             "Please select a pdf file first.")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.error(
-                                //     message: "Please select a pdf file first.",
-                                //   ),
-                                // );
+                               
                               }
                             }
                           }
                         },
                         child: SizedBox(
                           child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               if (waiting == false)
                                 Container(
@@ -229,8 +190,6 @@ class _PdfCatState extends State<PdfCat> {
                                     child: const Icon(
                                       Icons.check,
                                       color: Colors.white,
-                                      // size: MediaQuery.of(context).size.width *
-                                      //     0.045,
                                     ))
                               else
                                 const CircularProgressIndicator(),
@@ -258,7 +217,7 @@ class _PdfCatState extends State<PdfCat> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
                           shadowColor: Colors.grey
-                          // shape:
+                      
                           ),
                       onPressed: () async {
                         if (kIsWeb) {
@@ -275,12 +234,7 @@ class _PdfCatState extends State<PdfCat> {
                                     const SnackBar(
                                         content: Text(
                                             "File selected successfully")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.success(
-                                //     message: "File selected successfully",
-                                //   ),
-                                // );
+                             
                                 final List<Uint8List?> res = bytesFromPicker
                                     .files
                                     .map((_) => _.bytes)
@@ -294,13 +248,7 @@ class _PdfCatState extends State<PdfCat> {
                                   const SnackBar(
                                       content: Text(
                                           "Please select a file less than 10 mb")));
-                              // showTopSnackBar(
-                              //   context,
-                              //   const CustomSnackBar.error(
-                              //     message:
-                              //         "Please select a file less than 10 mb",
-                              //   ),
-                              // );
+                          
                             });
                           }
                         } else if (Platform.isAndroid) {
@@ -317,12 +265,7 @@ class _PdfCatState extends State<PdfCat> {
                                     const SnackBar(
                                         content: Text(
                                             "File selected successfully")));
-                                // showTopSnackBar(
-                                //   context,
-                                //   const CustomSnackBar.success(
-                                //     message: "File selected successfully",
-                                //   ),
-                                // );
+                               
                                 final File file1 = File(file.path!);
                                 setState(() {
                                   path2 = file1;
@@ -335,13 +278,7 @@ class _PdfCatState extends State<PdfCat> {
                                   const SnackBar(
                                       content: Text(
                                           "Please select a file less than 10 mb")));
-                              // showTopSnackBar(
-                              //   context,
-                              //   const CustomSnackBar.error(
-                              //     message:
-                              //         "Please select a file less than 10 mb",
-                              //   ),
-                              // );
+                             
                             });
                           }
                         }
@@ -360,8 +297,6 @@ class _PdfCatState extends State<PdfCat> {
                                   child: const Icon(
                                     Icons.file_upload,
                                     color: Colors.white,
-                                    // size: MediaQuery.of(context).size.width *
-                                    //     0.045,
                                   )),
                               const SizedBox(width: 10),
                               Center(
@@ -387,17 +322,6 @@ class _PdfCatState extends State<PdfCat> {
                           )),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(18),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     crossAxisAlignment: CrossAxisAlignment.end,
-                  //     children: const <Widget>[
-                  //       // Text("Swipe Up",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                  //       AnimatedSlideUp()
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),

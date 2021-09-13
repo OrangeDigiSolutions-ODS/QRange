@@ -1,9 +1,11 @@
 import "package:auto_size_text_pk/auto_size_text_pk.dart";
 import "package:barcode_scan2/barcode_scan2.dart";
+import "package:contacts_service/contacts_service.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:images_picker/images_picker.dart";
+import "package:permission_handler/permission_handler.dart";
 import "package:scan/scan.dart";
 import "package:url_launcher/url_launcher.dart";
 import "/qrviewer/qrviewimage.dart";
@@ -29,7 +31,6 @@ class _ScanCopyState extends State<ScanCopy> {
       TextEditingController(text: "Cancel");
 
   final double _aspectTolerance = 0;
-  // int _numberOfCameras = 0;
   final int _selectedCamera = -1;
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
@@ -43,11 +44,35 @@ class _ScanCopyState extends State<ScanCopy> {
   @override
   void initState() {
     super.initState();
-
+    scanText(widget.scantext);
     if (widget.scantext.contains("http")) {
       textcolor = Colors.blue;
     } else {
       textcolor = Colors.black;
+    }
+  }
+
+  String scanText(String scan) {
+    if (widget.scantext.contains("BEGIN:VCARD")) {
+      return widget.scantext;
+      // const String contactName = "Name: contactName\n";
+      // const String contactEmail = "Email: contactEmail\n";
+      // const String contactWebsite = "Website: contactWebsite\n";
+      // const String contactPhone = "Phone: contactPhone\n";
+      // const String contactPhoneWork = "Phone(work): contactPhoneWork\n";
+      // const String contactAddress = "Address: contactAddress\n";
+      // const String contactOrganization = "Organization: contactOrganization\n";
+      // const String contactDesignation = "Designation: contactDesignation";
+      // return contactName +
+      //     contactEmail +
+      //     contactWebsite +
+      //     contactPhone +
+      //     contactPhoneWork +
+      //     contactAddress +
+      //     contactOrganization +
+      //     contactDesignation;
+    } else {
+      return widget.scantext;
     }
   }
 
@@ -58,7 +83,6 @@ class _ScanCopyState extends State<ScanCopy> {
             "QR Result",
             style: TextStyle(color: Colors.black),
           ),
-          // backwardsCompatibility: false,
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xffDDDDDD),
           actions: <Widget>[
@@ -68,11 +92,9 @@ class _ScanCopyState extends State<ScanCopy> {
                 color: Colors.black,
               ),
               iconSize: 30,
-              // offset: const Offset(0, 60),
               color: const Color(0xff555555),
               itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                 PopupMenuItem<dynamic>(
-                    // enabled: false,
                     child: ListTile(
                   onTap: () {
                     Navigator.pop(context);
@@ -100,13 +122,10 @@ class _ScanCopyState extends State<ScanCopy> {
                         showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
-                                  // insetPadding: EdgeInsets.all(80),
                                   backgroundColor: const Color(0xffE5E5E5),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   content: SizedBox(
-                                    // width: MediaQuery.of(context).size.width *
-                                    //     0.15,
                                     height: MediaQuery.of(context).size.height *
                                         0.2,
                                     child: Column(
@@ -114,11 +133,8 @@ class _ScanCopyState extends State<ScanCopy> {
                                           MainAxisAlignment.center,
                                       children: <Widget>[
                                         SizedBox(
-                                          // width: 150,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  // fixedSize: Size(
-                                                  //     MediaQuery.of(context).size.width * 0.3, 50),
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 5,
@@ -132,20 +148,6 @@ class _ScanCopyState extends State<ScanCopy> {
                                                               30)),
                                                   shadowColor: Colors.grey),
                                               onPressed: _scan,
-                                              // if (scanResult != null) {
-                                              //   Navigator.push(
-                                              //       context,
-                                              //       MaterialPageRoute<
-                                              //               dynamic>(
-                                              //           builder: (_) =>
-                                              //               ScanCopy(
-                                              //                 scantext:
-                                              //                     scanResult!
-                                              //                         .rawContent,
-                                              //               )));
-                                              // }
-                                              // },
-                                              // icon: Icon(Icons.camera_alt_outlined,),
                                               child: Row(
                                                 children: <Widget>[
                                                   Container(
@@ -185,11 +187,8 @@ class _ScanCopyState extends State<ScanCopy> {
                                           height: 20,
                                         ),
                                         SizedBox(
-                                          // width: 150,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  // fixedSize: Size(
-                                                  //     MediaQuery.of(context).size.width * 0.45, 50),
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 5,
@@ -201,9 +200,7 @@ class _ScanCopyState extends State<ScanCopy> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               30)),
-                                                  shadowColor: Colors.grey
-                                                  // shape:
-                                                  ),
+                                                  shadowColor: Colors.grey),
                                               onPressed: () async {
                                                 final List<Media>? res =
                                                     await ImagesPicker.pick();
@@ -230,7 +227,6 @@ class _ScanCopyState extends State<ScanCopy> {
                                                               )));
                                                 }
                                               },
-                                              // icon: Icon(Icons.camera_alt_outlined,),
                                               child: Row(
                                                 children: <Widget>[
                                                   Container(
@@ -247,8 +243,6 @@ class _ScanCopyState extends State<ScanCopy> {
                                                       child: const Icon(
                                                         Icons.collections,
                                                         color: Colors.white,
-                                                        // size: MediaQuery.of(context).size.width *
-                                                        //     0.045,
                                                       )),
                                                   Text(
                                                     " Scan from Gallery",
@@ -267,16 +261,9 @@ class _ScanCopyState extends State<ScanCopy> {
                                         ),
                                       ],
                                     ),
-                                    // color: Colors.accents,
                                   ),
                                 ));
-
-                        // // Navigator.pop(context);
-                        // // Navigator.pushNamedAndRemoveUntil(
-                        // //     context, "/scan", (_) => false);
-                        // context.vxNav.push(Uri.parse("/scan"));
                       },
-                      // leading: Icon(Icons.add, color: Colors.white),
                       title: Row(
                         children: const <Widget>[
                           Icon(Icons.camera),
@@ -289,17 +276,12 @@ class _ScanCopyState extends State<ScanCopy> {
                       ),
                     ),
                   ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.pushNamed(context, "/createqr");
-                      // context.vxNav.push(Uri.parse("/createqr"));
                     },
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.qr_code),
@@ -310,13 +292,9 @@ class _ScanCopyState extends State<ScanCopy> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.privacyPolicy,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.security),
@@ -327,13 +305,9 @@ class _ScanCopyState extends State<ScanCopy> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.rateus,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.star),
@@ -343,13 +317,9 @@ class _ScanCopyState extends State<ScanCopy> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.aboutus,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.info),
@@ -359,13 +329,9 @@ class _ScanCopyState extends State<ScanCopy> {
                     ),
                   ),
                 ),
-                // const PopupMenuDivider(
-                //   height: 20,
-                // ),
                 PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.share,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Row(
                       children: const <Widget>[
                         Icon(Icons.share),
@@ -398,7 +364,6 @@ class _ScanCopyState extends State<ScanCopy> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              // title: Center(child: Image.asset("assets/images/copy.png",width: 25,height: 25,)),
               children: <Widget>[
                 SimpleDialogOption(
                     onPressed: () {},
@@ -416,31 +381,56 @@ class _ScanCopyState extends State<ScanCopy> {
                         GestureDetector(
                             onTap: _clickchange,
                             child: AutoSizeText(
-                              widget.scantext,
+                              scanText(widget.scantext),
                               style: TextStyle(color: textcolor),
                             )),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Clipboard.setData(
-                                  ClipboardData(text: widget.scantext));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("Text copied")));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shadowColor: Colors.grey,
-                              primary: const Color(0xffffffff),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32),
+                        if (widget.scantext.contains("BEGIN:VCARD"))
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                saveContactInPhone();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text("Contact Save")));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: Colors.grey,
+                                primary: const Color(0xffffffff),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                              ),
+                              child: const Text(
+                                "Save Contact",
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
-                            child: const Text(
-                              "Copy Text",
-                              style: TextStyle(color: Colors.black),
-                            ),
                           ),
-                        )
+                        if (!widget.scantext.contains("BEGIN:VCARD"))
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Clipboard.setData(
+                                    ClipboardData(text: widget.scantext));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text("Text copied")));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: Colors.grey,
+                                primary: const Color(0xffffffff),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                              ),
+                              child: const Text(
+                                "Copy Text",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          )
                       ],
                     ),
                   ),
@@ -461,8 +451,6 @@ class _ScanCopyState extends State<ScanCopy> {
               builder: (_) => ViewQRImage(
                     uri: widget.scantext,
                   )));
-      // context.vxNav
-      //     .push(Uri.parse("/viewqrimage"), params: widget.scantext);
     } else if (widget.scantext.contains("/o/pdf")) {
       setState(() {
         textcolor = Colors.blue;
@@ -473,8 +461,6 @@ class _ScanCopyState extends State<ScanCopy> {
               builder: (_) => ViewQRPDF(
                     url: widget.scantext,
                   )));
-      // context.vxNav
-      //     .push(Uri.parse("/viewqrpdf"), params: widget.scantext);
     } else if (widget.scantext.contains("http") &&
         !widget.scantext.contains("/o/pdf")) {
       setState(() {
@@ -528,6 +514,27 @@ class _ScanCopyState extends State<ScanCopy> {
               builder: (_) => ScanCopy(
                     scantext: scanResult,
                   )));
+    }
+  }
+
+  Future<void> saveContactInPhone() async {
+    try {
+      final PermissionStatus permission = await Permission.contacts.status;
+
+      if (permission != PermissionStatus.granted) {
+        await Permission.contacts.request();
+      }
+      if (permission == PermissionStatus.granted) {
+        final Contact newContact = Contact()
+          ..givenName = "Test"
+          ..emails = <Item>[Item(label: "email", value: "Testing")]
+          ..phones = <Item>[Item(label: "mobile", value: "7014174424")];
+
+        await ContactsService.addContact(newContact);
+      }
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      debugPrint("$e");
     }
   }
 }

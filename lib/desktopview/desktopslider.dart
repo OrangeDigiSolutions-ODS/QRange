@@ -83,7 +83,6 @@ class _DesktopSliderState extends State<DesktopSlider> {
                       Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(
                           context, "/createqr", (_) => false);
-                      // context.vxNav.push(Uri.parse("/createqr"));
                     },
                     title: const Text("Create QR",
                         style: TextStyle(color: Colors.white)),
@@ -95,7 +94,6 @@ class _DesktopSliderState extends State<DesktopSlider> {
                 const PopupMenuItem<dynamic>(
                   child: ListTile(
                     onTap: Menu.privacyPolicy,
-                    // leading: Icon(Icons.anchor, color: Colors.white),
                     title: Text("Privacy Policy",
                         style: TextStyle(color: Colors.white)),
                   ),
@@ -132,7 +130,6 @@ class _DesktopSliderState extends State<DesktopSlider> {
                             _,
                             fit: BoxFit.cover,
                             height: height,
-                            // width: MediaQuery.of(context).size.width,
                           )))
                       .toList(),
                 ),
@@ -164,7 +161,6 @@ class _DesktopSliderState extends State<DesktopSlider> {
                       .toList(),
                 ),
                 Container(
-                  // color: Colors.white,
                   color: const Color(0xFF4E4E4E),
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: Row(
@@ -172,22 +168,18 @@ class _DesktopSliderState extends State<DesktopSlider> {
                     children: <Widget>[
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              // fixedSize: Size(
-                              //     MediaQuery.of(context).size.width * 0.45, 50),
                               padding: const EdgeInsets.only(
                                   top: 5, right: 10, left: 10, bottom: 5),
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               shadowColor: Colors.grey
-                              // shape:
+                      
                               ),
                           onPressed: () {
                             Navigator.pushNamed(context, "/createqr");
 
-                            // context.vxNav.push(Uri.parse("/createqr"));
                           },
-                          // icon: Icon(Icons.camera_alt_outlined,),
                           child: Row(
                             children: <Widget>[
                               Container(
@@ -198,8 +190,6 @@ class _DesktopSliderState extends State<DesktopSlider> {
                                   child: const Icon(
                                     Icons.qr_code,
                                     color: Colors.white,
-                                    // size: MediaQuery.of(context).size.width *
-                                    //     0.045,
                                   )),
                               const AutoSizeText(
                                 " Create QR",

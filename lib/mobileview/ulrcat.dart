@@ -76,10 +76,10 @@ class _UrlCatState extends State<UrlCat> {
                               padding: const EdgeInsets.only(
                                   top: 5, right: 2, left: 2, bottom: 5),
                               primary: const Color(0xFFFFFFFF),
-                              // shape: const CircleBorder(),
+                              
                               shadowColor: Colors.grey,
                               shape: const StadiumBorder()
-                              // shape:
+                  
                               ),
                           onPressed: () {
                             if (urlController.text.contains("http")) {
@@ -107,8 +107,6 @@ class _UrlCatState extends State<UrlCat> {
                                     child: const Icon(
                                       Icons.check,
                                       color: Colors.white,
-                                      // size: MediaQuery.of(context).size.width *
-                                      //     0.045,
                                     )),
                                 const AutoSizeText(
                                   "  Generated QR",
@@ -121,18 +119,6 @@ class _UrlCatState extends State<UrlCat> {
                           ),
                         ),
                       ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.all(18),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     crossAxisAlignment: CrossAxisAlignment.end,
-                      //     children: const <Widget>[
-                      //       // Text("Swipe Up",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                      //       AnimatedSlideUp()
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

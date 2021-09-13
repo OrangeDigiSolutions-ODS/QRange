@@ -32,7 +32,6 @@ class _AnimatedSlideUpState extends State<AnimatedSlideUp>
     )..addListener(() {
         setState(() {});
       });
-    // Always repeat animation
     _controller.repeat();
     super.initState();
   }
@@ -55,7 +54,6 @@ class _AnimatedSlideUpState extends State<AnimatedSlideUp>
                 },
                 child: const Icon(
                   Icons.keyboard_arrow_up,
-                  // CommunityMaterialIcons.chevron_double_up,
                   color: Colors.white,
                   size: 25,
                 ),

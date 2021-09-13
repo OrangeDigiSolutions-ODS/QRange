@@ -50,7 +50,6 @@ class _TextCatState extends State<TextCat> {
         
                                     maxLength: 200,
                                     maxLines: 6,
-                                    // expands: true,
                                     decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: "Text",
@@ -63,15 +62,12 @@ class _TextCatState extends State<TextCat> {
                           )
                         ],
                       ))),
-        
-              //code for buttons
               Center(
                 child: Container(
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.58),
                   child: Column(
                     children: <Widget>[
-                      // if (path1 != null)
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.50,
                         height: MediaQuery.of(context).size.height * 0.07,
@@ -80,10 +76,8 @@ class _TextCatState extends State<TextCat> {
                               padding: const EdgeInsets.only(
                                   top: 5, right: 2, left: 2, bottom: 5),
                               primary: const Color(0xFFFFFFFF),
-                              // shape: const CircleBorder(),
                               shadowColor: Colors.grey,
                               shape: const StadiumBorder()
-                              // shape:
                               ),
                           onPressed: () {
                             if (textController.text != "") {
@@ -110,8 +104,6 @@ class _TextCatState extends State<TextCat> {
                                     child: const Icon(
                                       Icons.check,
                                       color: Colors.white,
-                                      // size: MediaQuery.of(context).size.width *
-                                      //     0.045,
                                     )),
                                 const AutoSizeText(
                                   "  Generated QR",
@@ -124,18 +116,6 @@ class _TextCatState extends State<TextCat> {
                           ),
                         ),
                       ),
-        
-                      // Padding(
-                      //   padding: const EdgeInsets.all(18),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     crossAxisAlignment: CrossAxisAlignment.end,
-                      //     children: const <Widget>[
-                      //       // Text("Swipe Up",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                      //       AnimatedSlideUp()
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

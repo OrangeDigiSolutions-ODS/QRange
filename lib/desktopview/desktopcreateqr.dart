@@ -1,3 +1,4 @@
+import 'package:QRange/desktopview/desktopvcardcat.dart';
 import "package:flutter/material.dart";
 import "package:sliding_up_panel/sliding_up_panel.dart";
 import "/desktopview/desktopurlcat.dart";
@@ -23,6 +24,7 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
     DesktopPDFCat(),
     DesktopUrlCat(),
     DesktopTextCat(),
+    DesktopVcardCat()
   ];
 
   void _onItemTapped(int index) {
@@ -76,34 +78,9 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                   ),
                   SlidingUpPanel(
                     renderPanelSheet: false,
-                    // backdropEnabled: true,
                     backdropOpacity: 0,
                     isDraggable: false,
-                    // isDraggable: false,
                     defaultPanelState: PanelState.OPEN,
-                    // header: Row(
-                    //   children: <Widget>[
-                    //     SizedBox(
-                    //       height: MediaQuery.of(context).size.height * 0.02,
-                    //       width: MediaQuery.of(context).size.width * 0.25,
-                    //     ),
-                    //     Center(
-                    //       child: Container(
-                    //         decoration: BoxDecoration(
-                    //             color: const Color(0xffDDDDDD).withOpacity(0.7),
-                    //             borderRadius: const BorderRadius.only(
-                    //                 topLeft: Radius.circular(20),
-                    //                 topRight: Radius.circular(20))),
-                    //         height: MediaQuery.of(context).size.height * 0.02,
-                    //         width: MediaQuery.of(context).size.width * 0.2,
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       height: MediaQuery.of(context).size.height * 0.02,
-                    //       width: MediaQuery.of(context).size.width * 0.20,
-                    //     ),
-                    //   ],
-                    // ),
                     minHeight: MediaQuery.of(context).size.height * 0.04,
                     maxHeight: MediaQuery.of(context).size.height * 0.2,
                     color: Colors.transparent,
@@ -126,6 +103,7 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                                   _buildIcon(Icons.picture_as_pdf, "PDF", 1),
                                   _buildIcon(Icons.link, "URL", 2),
                                   _buildIcon(Icons.text_fields, "Text", 3),
+                                  _buildIcon(Icons.file_copy, "Vcard", 4),
                                 ],
                               ),
                             ],
@@ -176,7 +154,6 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                 color: const Color(0xff555555),
                 itemBuilder: (_) => <PopupMenuEntry<dynamic>>[
                   PopupMenuItem<dynamic>(
-                      // enabled: false,
                       child: ListTile(
                     onTap: () {
                       Navigator.pop(context);
@@ -203,7 +180,6 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                         Navigator.pop(context);
                         Navigator.pushNamedAndRemoveUntil(
                             context, "/createqr", (_) => false);
-                        // context.vxNav.push(Uri.parse("/createqr"));
                       },
                       title: Row(
                         children: const <Widget>[
@@ -221,7 +197,6 @@ class _DesktopCreateQrState extends State<DesktopCreateQr> {
                   PopupMenuItem<dynamic>(
                     child: ListTile(
                       onTap: Menu.privacyPolicy,
-                      // leading: Icon(Icons.anchor, color: Colors.white),
                       title: Row(
                         children: const <Widget>[
                           Icon(Icons.security),
